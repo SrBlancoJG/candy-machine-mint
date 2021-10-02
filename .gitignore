@@ -24,3 +24,5 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+node-v14.17.6-linux-x64
+export.sh
