@@ -13,9 +13,11 @@
     --fnt-cont: 'Space Mono', monospace;
 
     --txt-xl: 74px;
+    --txt-m: 24px;
     --txt-s: 14px;
 
     --deg-color: var(--colorMin) 0%, var(--colorMid) 50%, var(--colorMax) 100%;
+    --sombra: 0px 3px 10px 0px black;
 }
 
 ::-webkit-scrollbar {
@@ -25,6 +27,12 @@
 *::selection {
     background: white;
     color: var(--colorMid); 
+}
+
+img, svg,
+h1, h2, h3,
+.btn {
+    user-select: none;
 }
 
 body {
@@ -37,11 +45,12 @@ body {
     font-size: var(--txt-s);
 }
 h1 {
-    padding: 0 25px;
+    padding: 10px 25px 15px 25px;
 
     font-size: var(--txt-xl);
     color: white;
     user-select: none;
+    background: black;
 }
 h1 span {
     color: var(--colorMid);
@@ -55,6 +64,10 @@ h1, h2, h3 {
 h1, h2 {
     font-size: var(--txt-xl);
 }
+h3 {
+    font-size: var(--txt-m);
+}
+
 under {
     position: relative;
 }
@@ -110,11 +123,11 @@ under::after {
 }
 .btn.on .sub-menu {
     display: flex;
-    transform: translateY(-66px);
-    -webkit-transform: translateY(-66px);
-    -moz-transform: translateY(-66px);
-    -ms-transform: translateY(-66px);
-    -o-transform: translateY(-66px);
+    transform: translateY(-74px);
+    -webkit-transform: translateY(-74px);
+    -moz-transform: translateY(-74px);
+    -ms-transform: translateY(-74px);
+    -o-transform: translateY(-74px);
 }
 .sub-menu .btn {
     padding: 20px;
@@ -172,14 +185,14 @@ under::after {
     z-index: 100000;
     
     width: 100%;
-    height: 2px;
+    height: 5px;
     background-color: var(--casi-negro)
 }
 #progreso-scroll {
     background-color: var(--casi-negro);
     height: 100%;
     
-    float: left;
+    float: right;
 }
 #fondo-scroll {
     width: 100%;
@@ -197,6 +210,7 @@ header {
     width: 100vw;
     height: 70px;
     background-color: var(--casi-negro);
+    box-shadow: var(--sombra);
     
     position: fixed;
     top: 0;
@@ -206,6 +220,12 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
 }
 header::after,
 header::before {
@@ -213,10 +233,9 @@ header::before {
     display: block;
     width: 100%;
     height: 1px;
-
     background-color: var(--gris-osc);
     background: linear-gradient(90deg, var(--casi-negro) 0%, var(--gris-osc) 33%, var(--gris-osc) 66%, var(--casi-negro) 100%);
-
+    
     position: absolute;
     top: 0;
     border-radius: 100%;
@@ -224,10 +243,17 @@ header::before {
 header::after {
     top: 69px;
 }
+header.off {
+    transform: translateY(-70px);
+    -webkit-transform: translateY(-70px);
+    -moz-transform: translateY(-70px);
+    -ms-transform: translateY(-70px);
+    -o-transform: translateY(-70px);
+}
 
 /* MAIN */
 .main {
-    width: 100vw;
+    width: 100%;
 
     position: absolute;
     top: 0;
@@ -302,19 +328,18 @@ section:last-of-type {
     padding-bottom: 100px;
 }
 
-#hero h1 {
-    margin-top: -55vh;
-}
 
+/* ROADMAP */
 #roadmap {
     position: relative;
 }
 
 .roadmap-prog {
-    height: 82%;
+    height: 80%;
     width: 10px;
     background: linear-gradient(180deg, var(--deg-color));
     border-radius: 10px;
+    box-shadow: var(--sombra);
     overflow: hidden;
 
     position: absolute;
@@ -348,7 +373,7 @@ section:last-of-type {
     justify-content: space-around;
 }
 .galery img {
-    outline: 2px soldi var(--colorMid);
+    border: 2px solid var(--colorMid);
 }
 
 /* Grid alternado */
@@ -373,15 +398,18 @@ section:last-of-type {
 .card {
     padding: 20px;
     background-color: var(--casi-negro);
-    border-radius: 10px;
-    box-shadow: 0px 3px 10px 0px black;
+    box-shadow: var(--sombra);
     position: relative;
-
     display: flex;
     flex-flow: row-reverse;
     justify-content: space-around;
     align-items: center;
     text-align: left;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 .card.off {
     filter: blur(1px);
@@ -391,12 +419,16 @@ section:last-of-type {
     flex-flow: row;
     text-align: right;
 }
+.card > img {
+    margin: 10px;
+}
 
 /* FOOTER */
 footer {
     width: 100%;
     padding: 10px;
     background-color: var(--casi-negro);
+    box-shadow: var(--sombra);
     
     position: relative;
     z-index: 10;
