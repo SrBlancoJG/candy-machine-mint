@@ -22,7 +22,7 @@ function initIFS() {
   ifsRenderer.animating = settings.animating;
   ifsRenderer.animationSpeed = settings.animationSpeed;
 
-  ifs.brightness = 1.22;
+  ifs.brightness = 1.32;
 
   for (var i = 0; i < 3; i++) {
     var angle = Math.random() * 2 * Math.PI;
@@ -37,7 +37,7 @@ function initIFS() {
         0.0, 0.0, 0.0, 1.0
       ),
       color: [Math.floor(Math.random() * (100 - 20 + 1) + 20), Math.floor(Math.random() * (100 - 20 + 1) + 20), Math.floor(Math.random() * (100 - 20 + 1) + 20)],
-      _color: [1,1,1,1],
+      _color: [1, 1, 1, 1],
       rotationSpeed: 0 | Math.random() * 100 + 50
     };
     ifs.functions.push(item);
@@ -121,8 +121,8 @@ function loadIFS(values) {
   for (var i = 0; i < count; i++) {
     object = {
       matrix: new GL.Matrix(),
-      color: [0,0,0],
-      _color: [1,1,1,1],
+      color: [0, 0, 0],
+      _color: [1, 1, 1, 1],
       rotationSpeed: 0
     };
 
@@ -153,19 +153,19 @@ function loadIFS(values) {
   ifsRenderer = newIfsRenderer;
 }
 
-gl.onupdate = function(seconds) {
+gl.onupdate = function (seconds) {
   ifs.step(seconds);
   ifsRenderer.step(seconds);
 };
 
 var fading = false;
 
-gl.ondraw = function() {
+gl.ondraw = function () {
   ifs.update();
   if (epilepsySafeTimer == 0) {
     if (!fading) {
       fading = true;
-      $canvasGl.animate({'opacity': 1}, 1000, 'swing', function() {fading = false;});
+      $canvasGl.animate({ 'opacity': 1 }, 1000, 'swing', function () { fading = false; });
     }
   }
   else {
@@ -175,15 +175,15 @@ gl.ondraw = function() {
   ifsRenderer.render();
 };
 
-gl.canvas.addEventListener('contextmenu', function(e) {
+gl.canvas.addEventListener('contextmenu', function (e) {
   e.preventDefault();
 });
 
 function glTextureToImage(texture) {
   var width = texture.width, height = texture.height,
-      prevWidth = parseInt($canvasGl.css('width')), prevHeight = parseInt($canvasGl.css('height'));
+    prevWidth = parseInt($canvasGl.css('width')), prevHeight = parseInt($canvasGl.css('height'));
 
-  $canvasGl.css({width: width, height: height});
+  $canvasGl.css({ width: width, height: height });
   canvasGl.width = width;
   canvasGl.height = height;
 
@@ -193,16 +193,16 @@ function glTextureToImage(texture) {
     'varying vec2 coord;',
 
     'void main() {',
-      'coord = (gl_Vertex.xy + 1.0) * 0.5;',
-      'gl_Position.zw = gl_Vertex.zw;',
-      'gl_Position.xy = gl_Vertex.xy;',
+    'coord = (gl_Vertex.xy + 1.0) * 0.5;',
+    'gl_Position.zw = gl_Vertex.zw;',
+    'gl_Position.xy = gl_Vertex.xy;',
     '}'
   ].join('\n'), [
     'uniform sampler2D texture;',
     'varying vec2 coord;',
 
     'void main() {',
-      'gl_FragColor = texture2D(texture, coord);',
+    'gl_FragColor = texture2D(texture, coord);',
     '}'
   ].join('\n'));
 
@@ -214,7 +214,7 @@ function glTextureToImage(texture) {
 
   var result = canvasGl.toDataURL();
 
-  $canvasGl.css({width: prevWidth, height: prevHeight});
+  $canvasGl.css({ width: prevWidth, height: prevHeight });
   canvasGl.width = prevWidth;
   canvasGl.height = prevHeight;
 
@@ -225,15 +225,15 @@ function glTextureToImage(texture) {
 
 function resize() {
   var sizeW = $('#fractal-container').width(),
-      sizeH = $('#fractal-container').height();
+    sizeH = $('#fractal-container').height();
 
-  $canvasGl.css({width: sizeW, height: sizeH});
+  $canvasGl.css({ width: sizeW, height: sizeH });
   canvasGl.width = sizeW;
   canvasGl.height = sizeH;
 
   gl.viewport(0, 0, sizeW, sizeH);
 
-  $canvas2d.css({width: sizeW, height: sizeH});
+  $canvas2d.css({ width: sizeW, height: sizeH });
   canvas2d.width = sizeW;
   canvas2d.height = sizeH;
 }
@@ -242,26 +242,33 @@ function getUrlHash() {
   return decodeURIComponent(document.location.hash.substr(1));
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   canvasGl = gl.canvas
   $canvasGl = $(canvasGl);
   $canvas2d = $('#fractal-ui');
   canvas2d = $canvas2d[0];
 
-  $(window).bind('hashchange', function() {
-		loadIFS(getUrlHash());
-	});
+  $(window).bind('hashchange', function () {
+    loadIFS(getUrlHash());
+  });
 
   loadIFS(getUrlHash());
-  if (ifs === undefined) {initIFS()};
+  if (ifs === undefined) { initIFS() };
   console.log("ifs", ifs)
-
-  
-  document.documentElement.style.setProperty('--color1', 'rgb('+ifs.functions[0].color.map((color) => color*255/100)+')')
-  document.documentElement.style.setProperty('--color2', 'rgb('+ifs.functions[1].color.map((color) => color*255/100)+')')
-  document.documentElement.style.setProperty('--color3', 'rgb('+ifs.functions[2].color.map((color) => color*255/100)+')')
+  let sumsColors = [];
+  for(let i = 0; i < 3; i++){
+    sumsColors.push(ifs.functions[i].color.reduce((acumulator, color) => acumulator + color));
+  }
+  console.log(sumsColors);
+  const indexMax = sumsColors.indexOf(Math.max(...sumsColors));
+  const indexMin = sumsColors.indexOf(Math.min(...sumsColors));
+  const indexMid = [0,1,2].filter(index => index != indexMin && index != indexMax)[0];
+  console.log(indexMax, indexMid, indexMin);
+  document.documentElement.style.setProperty('--colorMax', 'rgb(' + ifs.functions[indexMax].color.map((color) => color * 255 / 100) + ')')
+  document.documentElement.style.setProperty('--colorMid', 'rgb(' + ifs.functions[indexMid].color.map((color) => color * 255 / 100) + ')')
+  document.documentElement.style.setProperty('--colorMin', 'rgb(' + ifs.functions[indexMin].color.map((color) => color * 255 / 100) + ')')
   $('#the-fractal').replaceWith($(canvasGl));
-  $canvasGl.attr({'id': '#the-fractal', 'tabindex': '1'}).mousedown(function() { $(this).focus(); });
+  $canvasGl.attr({ 'id': '#the-fractal', 'tabindex': '1' }).mousedown(function () { $(this).focus(); });
 
   gl.animate();
 
