@@ -242,6 +242,20 @@ function getUrlHash() {
   return decodeURIComponent(document.location.hash.substr(1));
 }
 
+function set_colors() {
+  let sumsColors = [];
+  for(let i = 0; i < 3; i++){
+    sumsColors.push(ifs.functions[i].color.reduce((acumulator, color) => acumulator + color));
+  }
+  console.log(sumsColors);
+  const indexMax = sumsColors.indexOf(Math.max(...sumsColors));
+  const indexMin = sumsColors.indexOf(Math.min(...sumsColors));
+  const indexMid = [0,1,2].filter(index => index != indexMin && index != indexMax)[0];
+  console.log(indexMax, indexMid, indexMin);
+  document.documentElement.style.setProperty('--colorMax', 'rgb(' + ifs.functions[indexMax].color.map((color) => color * 255 / 100) + ')')
+  document.documentElement.style.setProperty('--colorMid', 'rgb(' + ifs.functions[indexMid].color.map((color) => color * 255 / 100) + ')')
+  document.documentElement.style.setProperty('--colorMin', 'rgb(' + ifs.functions[indexMin].color.map((color) => color * 255 / 100) + ')')
+}
 $(document).ready(function () {
   canvasGl = gl.canvas
   $canvasGl = $(canvasGl);
@@ -255,18 +269,7 @@ $(document).ready(function () {
   loadIFS(getUrlHash());
   if (ifs === undefined) { initIFS() };
   console.log("ifs", ifs)
-  let sumsColors = [];
-  for(let i = 0; i < 3; i++){
-    sumsColors.push(ifs.functions[i].color.reduce((acumulator, color) => acumulator + color));
-  }
-  console.log(sumsColors);
-  const indexMax = sumsColors.indexOf(Math.max(...sumsColors));
-  const indexMin = sumsColors.indexOf(Math.min(...sumsColors));
-  const indexMid = [0,1,2].filter(index => index != indexMin && index != indexMax)[0];
-  console.log(indexMax, indexMid, indexMin);
-  document.documentElement.style.setProperty('--colorMax', 'rgb(' + ifs.functions[indexMax].color.map((color) => color * 255 / 100) + ')')
-  document.documentElement.style.setProperty('--colorMid', 'rgb(' + ifs.functions[indexMid].color.map((color) => color * 255 / 100) + ')')
-  document.documentElement.style.setProperty('--colorMin', 'rgb(' + ifs.functions[indexMin].color.map((color) => color * 255 / 100) + ')')
+  set_colors()
   $('#the-fractal').replaceWith($(canvasGl));
   $canvasGl.attr({ 'id': '#the-fractal', 'tabindex': '1' }).mousedown(function () { $(this).focus(); });
 

@@ -1,0 +1,334 @@
+:root {
+    --colorMin: white;
+    --colorMid: white;
+    --colorMax: white;
+    
+    --casi-negro: #313131;
+    --gris-osc: #5e5e5e;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+*::selection {
+    background: white;
+    color: var(--colorMid); 
+}
+
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: black;
+    
+    text-align: center;
+}
+h1 {
+    padding: 0 25px;
+
+    font-size: 74px;
+    color: white;
+    user-select: none;
+}
+h1 span {
+    color: var(--colorMid);
+}
+under {
+    position: relative;
+}
+under::after {
+    content: '';
+    width: 100%;
+    height: 10px;
+    background: var(--colorMid);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* COMPONENTES */
+/* Botones */
+.btn {
+    padding: 5px 20px;
+    cursor: pointer;
+
+    text-decoration: none !important;
+    user-select: none;
+}
+.btn:hover,
+.MuiButton-root:hover {
+    background:  var(--colorMid);
+    box-shadow: 0 3px 6px 1px black;
+    
+    color: white;
+}
+/* Sub-menu */
+.btn .sub-menu {
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    z-index: 0;
+
+    width: 100vw;
+    background-color: var(--colorMid);
+    
+    display: none;
+    flex-flow: row;
+    justify-content: space-around;
+    
+    transform: translateY(100px);
+    transition: all .5s;
+    user-select: none;
+}
+.btn.on .sub-menu {
+    display: flex;
+    transform: translateY(-70px);
+    -webkit-transform: translateY(-70px);
+    -moz-transform: translateY(-70px);
+    -ms-transform: translateY(-70px);
+    -o-transform: translateY(-70px);
+}
+.sub-menu .btn {
+    padding: 20px;
+    color: black;
+}
+.sub-menu .btn:hover {
+    box-shadow: none;
+}
+.sub-menu::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--casi-negro);
+    background: linear-gradient(90deg, var(--casi-negro) 0%, white 33%, white 66%, var(--casi-negro) 100%);
+    
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+}
+
+/* HOME */
+/* Falso scroll */
+#falso-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+    
+    width: 100%;
+    height: 2px;
+    background-color: var(--casi-negro)
+}
+#progreso-scroll {
+    background-color: var(--casi-negro);
+    height: 100%;
+    
+    float: left;
+}
+#fondo-scroll {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 50%, var(--colorMax) 100%);
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Menu */
+header {
+    width: 100vw;
+    height: 70px;
+    background-color: var(--casi-negro);
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+header::after,
+header::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+
+    background-color: var(--gris-osc);
+    background: linear-gradient(90deg, var(--casi-negro) 0%, var(--gris-osc) 33%, var(--gris-osc) 66%, var(--casi-negro) 100%);
+
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+}
+header::after {
+    top: 69px;
+}
+
+/* MAIN */
+.main {
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Fractal */
+#fractal-container {
+    width: 100vw;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+#fractal-container canvas {
+    height: 100vh !important;
+    transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+}
+
+/* Secciones */
+section {
+    min-height: 100vh;
+    max-width: 100vw;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 10px 20px;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+section:first-child {
+    min-height: 75vh;
+    background: linear-gradient(-180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,.6) 100%);
+}
+section:last-of-type {
+    padding-bottom: 50px;
+}
+
+#hero h1 {
+    margin-top: -55vh;
+}
+
+/* FGaleria */
+.galeria {
+    max-width: 90%;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-around;
+}
+.galery img {
+    outline: 2px soldi var(--colorMid);
+}
+
+/* Grid alternado */
+.alt-grid {
+    display: flex;
+    flex-flow: column;
+}
+.grid-item {
+    width: 40%;
+}
+.grid-item:nth-child(even) {
+    margin: 0 0 0 auto;
+}
+.grid-item:nth-child(even) h2 {
+    color: var(--colorMid);
+}
+.grid-item:nth-child(odd) h2 {
+    color: var(--colorMax);
+}
+
+/* Tarjeta */
+.card {
+    padding: 20px;
+    background-color: var(--casi-negro);
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px 0px black;
+}
+
+
+/* FOOTER */
+footer {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--casi-negro);
+    
+    position: relative;
+    z-index: 10;
+}
+footer::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    
+    background-color: var(--casi-negro);
+    background: linear-gradient(90deg, var(--casi-negro) 0%, var(--gris-osc) 33%, var(--gris-osc) 66%, var(--casi-negro) 100%);
+    
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+}
+footer > div {
+    max-width: 1000px;
+    padding: 10px;
+    margin: 0 auto;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* MOVIL */
+@media (max-width: 991px) {
+    /* Galeria */
+    .galery > img {
+        width: 90%;
+        margin: 10px auto;
+        height: 100%;
+    }
+    /* FGrid alternado */
+    .grid-item {
+        width: 90%;
+        margin: 20px auto !important;
+    }
+    /* Footer */
+    footer > div {
+        max-width: 90%;
+    }
+}
+
+
+/* TMP */
+paleta {
+    display: flex;
+    flex-flow: row;
+}
+paleta > div {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+paleta > div:first-child {
+    background: var(--colorMin);
+}
+paleta > div {
+    background: var(--colorMid);
+}
+paleta > div:last-child {
+    background: var(--colorMax);
+}
