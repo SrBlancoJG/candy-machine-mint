@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             set_colors();
             console.log('🦧')
         }, 5000);
-
     });
+
+    /* BOTON */
+    for (btn of document.querySelectorAll('.MuiButtonBase-root')) {
+        btn.classList.add('btn')
+    }
 });
