@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
     }
+    
     /* FALSO SCROLL */
     function getScrollPercent() {
        var h = document.documentElement,
@@ -29,6 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         padre.addEventListener('click', function() {
             padre.classList.toggle('on')
         }.bind(padre));
+    }
+    const faqDespegables = document.querySelectorAll('.faq-despegable');
+
+    let i = 0;
+    for(let faq of document.querySelectorAll('.faq-padre')){
+        faq.addEventListener('click', function(){
+            faqDespegables[i].classList.toggle('desplegado');
+        });
+        i++;
     }
 
     /* Cambiar fractales? */
