@@ -171,9 +171,12 @@ under::after {
     -o-transition:all .5s !important;
 }
 .MuiButton-root:hover {
-    letter-spacing: 8px !important;
-    box-shadow: none !important;
-    /* background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 30%, var(--colorMid) 70%, var(--colorMax) 100%) !important; */
+    /*letter-spacing: 8px !important;
+    */box-shadow: none !important;
+    /*background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 30%, var(--colorMid) 70%, var(--colorMax) 100%) !important;
+    */
+    filter: brightness(.5);
+    -webkit-filter: brightness(.5);
 }
 .btn {
     padding: 10px 40px;
@@ -387,8 +390,8 @@ header.off {
 }
 
 header > .container {
-    max-width: 1491px;
-    width: 80%;
+    max-width: 1444px;
+    width: calc(100% - 60px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -407,17 +410,20 @@ header a path {
 #hover-main-menu {
     --alto: 40px;
     width: 100%;
+    max-width: 1440px;
     height: var(--alto);
     background: rgba(0,0,0,.6);
 
     position: absolute;
     left: 0;
+    right: 0;
+    margin: auto;
     bottom:  calc(var(--alto) * -1);
 
     display: flex;
     flex-flow: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 /* #hover-main-menu::before,
 #hover-main-menu::after  */
@@ -432,7 +438,8 @@ header a path {
     background-color: white;
     color: black;
     padding: 5px;
-    outline: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 #hover-main-menu > div {
     background: rgba(0,0,0,1);
