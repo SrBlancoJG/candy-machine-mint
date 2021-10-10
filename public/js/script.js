@@ -34,9 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Cambiar fractales? */
     $(document).ready(function () {
         setInterval(() => {
-            initIFS();
-            set_colors();
-            console.log('🦧')
+            if (window.screenTop < 500) {
+                initIFS();
+                set_colors();
+                console.log('🦧')
+            }
         }, 5000);
     });
 
