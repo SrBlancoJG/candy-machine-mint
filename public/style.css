@@ -334,7 +334,7 @@ header {
     --alto: 44px;
     width: 100vw;
     height: var(--alto);
-    background-color: var(--casi-negro);
+    background-color: black;
     box-shadow: var(--sombra);
     position: fixed;
     top: 0;
@@ -378,7 +378,7 @@ header > .container {
     max-width: 1000px;
     width: 80%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 header svg {
@@ -406,24 +406,31 @@ header a path {
     align-items: center;
     justify-content: space-evenly;
 }
-#hover-main-menu::before,
-#hover-main-menu::after {
-    content: '¥';
-    font-size: 32px;
-    transition: all .5s;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -ms-transition: all .5s;
-    -o-transition: all .5s;
+/* #hover-main-menu::before,
+#hover-main-menu::after  */
+#hover-main-menu .desp-menu {
+    /*content: '¥';
+    */font-size: 32px;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    background-color: white;
+    color: black;
+    padding: 4px 5px;
 }
-header.off #hover-main-menu::before {
+/* header.off #hover-main-menu::before */
+header.off #hover-main-menu .desp-menu:first-child {
     transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
     -moz-transform: rotate(-180deg);
     -ms-transform: rotate(-180deg);
     -o-transform: rotate(-180deg);
 }
-header.off #hover-main-menu::after {
+/* header.off #hover-main-menu::after  */
+header.off #hover-main-menu .desp-menu:last-child {
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);

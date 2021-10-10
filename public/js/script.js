@@ -10,18 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
             y_offs = window.pageYOffset;
             if( ev.deltaY > 0 && y_offs != last_y_offs) {
                 document.querySelector('header').classList.add('off')
-            } /* else {
+            } else {
                 document.querySelector('header').classList.remove('off')
-            } */
+            }
 
             last_y_offs = y_offs;
         });   
+        for (let btn of document.querySelectorAll('#hover-main-menu .desp-menu')) {
+            btn.addEventListener('click', () => {
+                document.querySelector('header').classList.toggle('off')
+            });
+        }
+        for (let btn of document.querySelectorAll('#hover-main-menu .stats')) {
+            btn.addEventListener('click', () => {
+                document.querySelector('header').classList.toggle('off')
+            });
+        }
+        document.querySelector('.MuiButton-root').addEventListener('click', () => {
+            document.querySelector('header').classList.toggle('off')
+        });
     }
 
     /* SACAR MENU EN HOVER */
-    document.querySelector('#hover-main-menu').addEventListener('mouseover', () => {
+    /* document.querySelector('#hover-main-menu').addEventListener('mouseover', () => {
         document.querySelector('header').classList.remove('off')
-    });
+    }); */
 
     /* FALSO SCROLL */
     function getScrollPercent() {
