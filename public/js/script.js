@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.screenTop < 500) {
                 initIFS();
                 set_colors();
-                console.log('🦧')
+                //console.log('🦧')
             }
         }, 250);
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.screenTop < 500) {
                     initIFS();
                     set_colors();
-                    console.log('🦧')
+                    //console.log('🦧')
                 }
             }, 2500);
         }, 1500);

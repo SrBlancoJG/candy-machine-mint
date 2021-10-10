@@ -678,7 +678,9 @@ section:last-of-type {
     font-size: var(--txt-xl);
     margin: 0 auto 100px;
 }
-
+#roadmap h3 {
+    font-family: var(--fnt-cont);
+}
 .roadmap-prog {
     height: 95%;
     width: 10px;
@@ -711,7 +713,9 @@ section:last-of-type {
     padding: 0 50px;
 }
 .alt-grid h3 {
-    font-size: var(--txt-l);
+    font-size: var(--txt-xl);
+    font-family: var(--fnt-cont);
+    margin: 0;
 }
 .grid-item {
     width: 50%;
@@ -724,10 +728,11 @@ section:last-of-type {
 .alt-grid .grid-item p::before {
     content: '¥';
     color: var(--color);
+    font-size: 32px;
     
     position: absolute;
     left: 2px;
-    top: 0;
+    top: -5px;
     bottom: 0;
     margin: auto;
 }
@@ -778,7 +783,7 @@ section:last-of-type {
     
     display: flex;
     flex-flow: row-reverse;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     text-align: left;
 }
