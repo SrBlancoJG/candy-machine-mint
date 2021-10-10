@@ -942,6 +942,11 @@ footer > div {
         left: 30px;
     }
 }
+@media (max-width: 1500px) {
+    section::before, section::after {
+        content: none;
+    }
+}
 
 /* TMP */
 paleta {
