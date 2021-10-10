@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
             y_offs = window.pageYOffset;
             if( ev.deltaY > 0 && y_offs != last_y_offs) {
                 document.querySelector('header').classList.add('off')
-            } else {
+            } /* else {
                 document.querySelector('header').classList.remove('off')
-            }
+            } */
 
             last_y_offs = y_offs;
         });   
