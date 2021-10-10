@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ESCRITORIO */
     if (window.innerWidth > 991) {
         /* ESCONDER MENU */
-        let y_offs = window.pageYOffset;
+        /* let y_offs = window.pageYOffset;
         let last_y_offs = y_offs;
-        /* window.addEventListener('wheel', (ev) => {
+        window.addEventListener('wheel', (ev) => {
             console.log(ev);
             
             y_offs = window.pageYOffset;
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             last_y_offs = y_offs;
-        });   */ 
+        });   
         for (let btn of document.querySelectorAll('#hover-main-menu .desp-menu')) {
             btn.addEventListener('click', () => {
                 document.querySelector('header').classList.toggle('off')
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.querySelector('.MuiButton-root').addEventListener('click', () => {
             document.querySelector('header').classList.toggle('off')
-        });
+        }); */
     }
 
     /* SACAR MENU EN HOVER */

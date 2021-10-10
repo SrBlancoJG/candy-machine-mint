@@ -32,6 +32,9 @@
     background: white;
     color: var(--colorMid); 
 } */
+* {
+    user-select: none;
+}
 *::selection {
     background: var(--colorMid);
 }
@@ -218,6 +221,8 @@ under::after {
 }
 .sub-menu .btn:hover {
     box-shadow: none;
+    filter: brightness(.5);
+    -webkit-filter: brightness(.5);
 }
 .sub-menu::before {
     content: '';
@@ -254,8 +259,8 @@ under::after {
     -moz-transition: all .5s;
     -ms-transition: all .5s;
     -o-transition: all .5s;
-    animation: rainbow 10s infinite;
-    -webkit-animation: rainbow 10s infinite;
+    /* animation: rainbow 10s infinite;
+    -webkit-animation: rainbow 10s infinite; */
 }
 .btn.mint:hover {
     letter-spacing: 20px;
@@ -397,7 +402,7 @@ header a path {
     --alto: 40px;
     width: 100%;
     height: var(--alto);
-    /* background: rgba(0,0,0,1); */
+    background: rgba(0,0,0,.6);
 
     position: absolute;
     left: 0;
@@ -533,12 +538,37 @@ section:last-of-type {
     font-size: var(--txt-m);
 }
 #galery img {
-    border: 2px solid var(--colorMid);
-
+    border: 2px solid white;
     /* Temporal ??? */
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference;
     animation: rainbow 10s infinite;
-    -webkit-animation: rainbow 10s infinite;
+    -webkit-animation: rainbow 10s infinite; */
+}
+#galery .dec-img {
+    position: relative;
+    width: fit-content;
+}
+#galery .dec-img::before,
+#galery .dec-img::after {
+    content: '¥';
+    position: absolute;
+    color: white;
+    font-size: 32px;
+
+    --margen: 10px;
+}
+#galery .dec-img::before {
+    top: var(--margen);
+    left: var(--margen);
+}
+#galery .dec-img::after {
+    bottom: var(--margen);
+    right: var(--margen);
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
 }
 
 /* FAQ */
@@ -560,7 +590,7 @@ section:last-of-type {
 .padre-desplegable .Q {
     cursor: pointer;
     background-color: var(--colorMid);
-    padding: 5px 10px;
+    padding: 5px 25px 5px 10px;
     position: relative;
     margin-bottom: 0;
     text-shadow: 1px 1px 6px black;
@@ -604,7 +634,7 @@ section:last-of-type {
 .padre-desplegable .A {
     max-height: 0px;
     overflow: hidden;
-    margin: 0 0 20px 0;
+    margin: 5px 0 20px 0;
     padding: 0 10px;
     transition: max-height .5s;
     -webkit-transition: max-height .5s;
@@ -614,6 +644,11 @@ section:last-of-type {
 }
 .padre-desplegable.on .A {
     max-height: 500px;
+}
+.padre-desplegable .A a {
+    text-decoration: underline dashed !important;
+    color: white !important;
+    font-weight: 800;
 }
 .padre-desplegable .A span {
     padding: 10px 0px 10px 30px;
@@ -770,7 +805,7 @@ section:last-of-type {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 .grid .grid-item > div {
     width: 40%;
