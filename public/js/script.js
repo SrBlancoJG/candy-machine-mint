@@ -77,27 +77,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
 
     });
+    
+    var controller = new ScrollMagic.Controller();
+    /* REVEAL GALERIA */
+    for (let i=1; i<=4; i++) {
+        new ScrollMagic.Scene({
+            triggerElement: "#reveal-1-"+i,
+            triggerHook: 0.5, // show, when scrolled 10% into view
+            duration: "80%", // hide 10% before exiting view (80% + 10% from bottom)
+            offset: 50 // move trigger to center of element
+        })
+        .setClassToggle("#reveal-1-"+i, "visible") // add class to reveal
+        .addTo(controller);
+    }
 
+    /* REVEAL FAQ */
+    new ScrollMagic.Scene({
+        triggerElement: "#faq",
+        triggerHook: 0.5, // show, when scrolled 10% into view
+        duration: "80%", // hide 10% before exiting view (80% + 10% from bottom)
+        offset: 50 // move trigger to center of element
+    })
+    .setClassToggle("#faq", "visible") // add class to reveal
+    .addTo(controller);
 
-    /* function getColors(c) {
-        var col, colors = {};
-        var pixels, r, g, b, a;
-        r = g = b = a = 0;
-        pixels = c.getImageData(0, 0, c.width, c.height);
-        for (var i = 0, data = pixels.data; i < data.length; i += 4) {
-            r = data[i];
-            g = data[i + 1];
-            b = data[i + 2];
-            a = data[i + 3]; // alpha
-            // skip pixels >50% transparent
-            if (a < (255 / 2))
-                continue; 
-            col = rgbToHex(r, g, b);
-            if (!colors[col])
-                colors[col] = 0;
-            colors[col]++;
-        }
-        return colors;
-    } */
-    /* console.log(getColors(document.querySelector('#fractal-container > canvas'))) */
+    let c = 0;
+    for (let padre of document.querySelectorAll('#faq .padre-desplegable')) {
+        padre.style.transitionDelay = c+'s';
+        c += .2;
+    }
+
 });

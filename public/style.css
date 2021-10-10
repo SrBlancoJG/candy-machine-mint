@@ -584,6 +584,45 @@ section:last-of-type {
     -ms-transform: rotate(180deg);
     -o-transform: rotate(180deg);
 }
+#galery .reveal {
+    opacity: 0;
+    transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+}
+#galery .reveasl > div {
+    transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -ms-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+}
+#galery .reveal > div:first-child {
+    transform: translateX(50px);
+    -webkit-transform: translateX(50px);
+    -moz-transform: translateX(50px);
+    -ms-transform: translateX(50px);
+    -o-transform: translateX(50px);
+}
+#galery .reveal > div:last-child {
+    transform: translateX(-50px);
+    -webkit-transform: translateX(-50px);
+    -moz-transform: translateX(-50px);
+    -ms-transform: translateX(-50px);
+    -o-transform: translateX(-50px);
+}
+#galery .reveal.visible {
+    opacity: 1;
+}
+#galery .reveal.visible > div {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+}
 
 /* FAQ */
 #faq h2 {
@@ -684,6 +723,18 @@ section:last-of-type {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+#faq .padre-desplegable {
+    opacity: 0;
+    transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+}
+#faq.visible .padre-desplegable {
+    opacity: 1;
 }
 
 /* ROADMAP */
