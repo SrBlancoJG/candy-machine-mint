@@ -610,6 +610,11 @@ section:last-of-type {
     text-shadow: 1px 1px 6px black;
     mix-blend-mode: difference;
 }
+.padre-desplegable .Q:hover {
+    filter: brightness(1.5);
+    -webkit-filter: brightness(1.5);
+    mix-blend-mode: unset;
+}
 .padre-desplegable .Q::before,
 .padre-desplegable .Q::after {
     content: '';
