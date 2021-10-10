@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 set_colors();
                 console.log('🦧')
             }
-        }, 500);
+        }, 250);
 
         setTimeout(() => {
             clearInterval(tmp_inter);
