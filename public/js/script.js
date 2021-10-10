@@ -9,10 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 document.querySelector('header').classList.remove('off')
             }
-        });
-        
+        });   
     }
-    
+    /* SACAR MENU EN HOVER */
+    document.querySelector('#hover-main-menu').addEventListener('mouseover', () => {
+        document.querySelector('header').classList.remove('off')
+    });
+
     /* FALSO SCROLL */
     function getScrollPercent() {
        var h = document.documentElement,
@@ -25,31 +28,34 @@ document.addEventListener('DOMContentLoaded', () => {
    f_scroll();
    window.addEventListener('scroll', f_scroll);
 
-    /* SUBMENUS */
-    for (padre of document.querySelectorAll('.padre-desplegable')) {
+    /* DESPLEGABLES */
+    for (let padre of document.querySelectorAll('.padre-desplegable')) {
         padre.addEventListener('click', function() {
-            padre.classList.toggle('on')
-        }.bind(padre));
-    }
-    const faqDespegables = document.querySelectorAll('.faq-despegable');
-
-    let i = 0;
-    for(let faq of document.querySelectorAll('.faq-padre')){
-        faq.addEventListener('click', function(){
-            faqDespegables[i].classList.toggle('desplegado');
+            padre.classList.toggle('on');
         });
-        i++;
     }
 
     /* Cambiar fractales? */
     $(document).ready(function () {
-        setInterval(() => {
+        let tmp_inter = setInterval(() => {
             if (window.screenTop < 500) {
                 initIFS();
                 set_colors();
                 console.log('🦧')
             }
-        }, 5000);
+        }, 500);
+
+        setTimeout(() => {
+            clearInterval(tmp_inter);
+            setInterval(() => {
+                if (window.screenTop < 500) {
+                    initIFS();
+                    set_colors();
+                    console.log('🦧')
+                }
+            }, 2500);
+        }, 1500);
+
     });
 
     /* BOTON */
