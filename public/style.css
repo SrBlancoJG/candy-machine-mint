@@ -137,6 +137,7 @@ under::after {
     width: 350px;
     padding: 0 !important;
     background-color: var(--colorMid) !important;
+    box-shadow: none !important;
     /* background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 30%, var(--colorMid) 70%, var(--colorMax) 100%); */
     
     border-radius: 0 !important;
@@ -235,7 +236,7 @@ under::after {
 
 /* MINT */
 .btn.mint {
-    width: 250px;
+    width: 300px;
     padding: 15px 40px;
     margin-bottom: 15px;
     background-color: var(--colorMin);
@@ -332,11 +333,11 @@ under::after {
 
 /* Menu */
 header {
-    --alto: 44px;
+    --alto: 43px;
     width: 100vw;
     height: var(--alto);
     background-color: var(--casi-negro);
-    box-shadow: var(--sombra);
+    /* box-shadow: var(--sombra); */
     position: fixed;
     top: 0;
     left: 0;
@@ -393,10 +394,10 @@ header a path {
 
 
 #hover-main-menu {
-    --alto: 55px;
+    --alto: 40px;
     width: 100%;
     height: var(--alto);
-    background: rgba(0,0,0,1);
+    /* background: rgba(0,0,0,1); */
 
     position: absolute;
     left: 0;
@@ -409,10 +410,9 @@ header a path {
 }
 /* #hover-main-menu::before,
 #hover-main-menu::after  */
-#hover-main-menu .desp-menu {
-    /*content: '¥';
-    */font-size: 32px;
-    cursor: pointer;
+.desp-menu {
+    user-select: none;
+    font-size: 32px;
     transition: all .2s;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
@@ -422,24 +422,16 @@ header a path {
     color: black;
     padding: 4px 5px;
 }
-/* header.off #hover-main-menu::before */
-header.off #hover-main-menu .desp-menu:first-child {
-    transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    -moz-transform: rotate(-180deg);
-    -ms-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg);
-}
-/* header.off #hover-main-menu::after  */
-header.off #hover-main-menu .desp-menu:last-child {
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
+#hover-main-menu > div {
+    background: rgba(0,0,0,1);
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 #hover-main-menu .stats {
     font-size: var(--txt-s);
+    
 }
 
 /* MAIN */
@@ -695,7 +687,7 @@ section:last-of-type {
     position: relative;
 }
 .alt-grid .grid-item p::before {
-    content: 'α';
+    content: '¥';
     color: var(--color);
     
     position: absolute;
@@ -824,6 +816,12 @@ footer > div {
 
 /* MOVIL */
 @media (max-width: 991px) {
+    header > .container {
+        width: 100%;
+    }
+    .desp-menu {
+        display: none;
+    }
     section {
         max-width: calc(100vw - 36px);
     }
@@ -899,6 +897,8 @@ paleta {
     top: 0px;
     left: 0px;
     background: white;
+
+    display: none;
 }
 paleta > div {
     width: 20px;
