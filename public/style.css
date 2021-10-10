@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap');
 :root {
     --colorMin: white;
     --colorMid: white;
@@ -10,7 +11,8 @@
     --gris-osc: #5e5e5e;
 
     --fnt-title: 'Major Mono Display', monospace;
-    --fnt-cont: 'Space Mono', monospace;
+    --fnt-cont-old: 'Space Mono', monospace;
+    --fnt-cont: 'Inconsolata', monospace;
 
     --txt-xl: 74px;
     --txt-l: 30px;
@@ -112,12 +114,36 @@ under::after {
 /* COMPONENTES */
 /* Botones */
 .MuiButton-root {
+    width: 350px;
+    padding: 0 !important;
     background-color: var(--colorMid) !important;
+    background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 30%, var(--colorMid) 70%, var(--colorMax) 100%);
+    
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
     -ms-border-radius: 0 !important;
     -o-border-radius: 0 !important;
+   
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    font-family: var(--fnt-cont) !important;
+    text-transform: lowercase !important;
+    font-weight: 600 !important;
+    font-size: var(--txt-m) !important;
+    letter-spacing: 5px !important;
+    
+    transition:all .5s !important;
+    -webkit-transition:all .5s !important;
+    -moz-transition:all .5s !important;
+    -ms-transition:all .5s !important;
+    -o-transition:all .5s !important;
+}
+.MuiButton-root:hover {
+    letter-spacing: 8px !important;
+    background: linear-gradient(90deg, var(--colorMin) 0%, var(--colorMid) 30%, var(--colorMid) 70%, var(--colorMax) 100%) !important;
 }
 .btn {
     padding: 10px 40px;
@@ -336,13 +362,19 @@ header svg {
     cursor: pointer;
     filter: drop-shadow(2px 4px 4px black);
 }
-header svg path {
+header a:first-of-type path {
+    fill: var(--colorMin);
+}
+header a path {
     fill: var(--colorMid);
+}
+header a:last-of-type path {
+    fill: var(--colorMax);
 }
 
 
 #hover-main-menu {
-    --alto: 50px;
+    --alto: 75px;
     width: 100%;
     height: var(--alto);
 
@@ -478,7 +510,7 @@ section:last-of-type {
 .padre-desplegable .Q {
     cursor: pointer;
     background-color: var(--colorMid);
-    padding: 0 10px;
+    padding: 5px 10px;
     position: relative;
     margin-bottom: 0;
     text-shadow: 1px 1px 6px black;
@@ -593,33 +625,62 @@ section:last-of-type {
     align-items: center;
     padding: 0 50px;
 }
+.alt-grid h3 {
+    font-size: var(--txt-l);
+}
 .grid-item {
-    width: 30%;
+    width: 50%;
     margin: 20px 0;
 }
+.alt-grid .grid-item p {
+    padding-left: 35px;
+    position: relative;
+}
+.alt-grid .grid-item p::before {
+    content: 'α';
+    color: var(--color);
+    
+    position: absolute;
+    left: 2px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
 
+.grid-item:first-child {
+    --color: var(--colorMin);
+}
 .grid-item:first-child *::selection {
-    background-color: var(--colorMin);
+    background-color: var(--color);
 }
 .grid-item:first-child *:is(h3, path) {
-    color: var(--colorMin);
-    fill: var(--colorMin);
+    color: var(--color);
+    fill: var(--color);
 }
 
+.grid-item {
+    --color: var(--colorMid);
+}
 .grid-item *::selection {
-    background-color: var(--colorMid);
+    background-color: var(--color);
 }
 .grid-item *:is(h3, path) {
-    color: var(--colorMid);
-    fill: var(--colorMid);
+    color: var(--color);
+    fill: var(--color);
 }
 
+.grid-item:last-child {
+    --color: var(--colorMax);
+}
 .grid-item:last-child *::selection {
-    background-color: var(--colorMax);
+    background-color: var(--color);
 }
 .grid-item:last-child *:is(h3, path) {
-    color: var(--colorMax);
-    fill: var(--colorMax);
+    color: var(--color);
+    fill: var(--color);
+}
+.alt-grid .card {
+    font-size: var(--txt-m);
 }
 
 /* Tarjeta */
@@ -638,8 +699,9 @@ section:last-of-type {
 }
 .card.off {
     filter: blur(1px);
-    opacity: .5;
+    opacity: .75;
     user-select: none;
+    mix-blend-mode: difference;
 }
 .card > img {
     margin: 10px;
@@ -687,6 +749,9 @@ footer::before {
     top: 0;
     border-radius: 100%;
 }
+footer a {
+    color: white;
+}
 footer > div {
     max-width: 1000px;
     padding: 10px;
@@ -702,14 +767,7 @@ footer > div {
     section {
         max-width: calc(100vw - 36px);
     }
-    .roadmap-prog {
-        width: 20px;
-        height: 90%;
-
-        left: 50px;
-        margin: 0 auto 0 0;
-        margin-bottom: 100px
-    }
+    
     /* Grid alternado */
     .alt-grid {
         margin-left: 50px;
@@ -751,9 +809,13 @@ footer > div {
         font-size: var(--txt-s);
     }
     
-    /* ROADMAP */
-    #roadmap h2 {
-        text-align: right;
+    .roadmap-prog {
+        width: 20px;
+        height: 80%;
+
+        left: 50px;
+        margin: 0 auto 0 0;
+        margin-bottom: 100px
     }
 
     /* Footer */

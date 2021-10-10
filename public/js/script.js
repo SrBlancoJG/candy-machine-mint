@@ -2,15 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ESCRITORIO */
     if (window.innerWidth > 991) {
         /* ESCONDER MENU */
+        let y_offs = window.pageYOffset;
+        let last_y_offs = y_offs;
         window.addEventListener('wheel', (ev) => {
-            console.log(ev)
-            if( ev.deltaY > 0 ) {
+            console.log(ev);
+            
+            y_offs = window.pageYOffset;
+            if( ev.deltaY > 0 && y_offs != last_y_offs) {
                 document.querySelector('header').classList.add('off')
             } else {
                 document.querySelector('header').classList.remove('off')
             }
+
+            last_y_offs = y_offs;
         });   
     }
+
     /* SACAR MENU EN HOVER */
     document.querySelector('#hover-main-menu').addEventListener('mouseover', () => {
         document.querySelector('header').classList.remove('off')
@@ -58,8 +65,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    /* BOTON */
-    for (btn of document.querySelectorAll('.MuiButtonBase-root')) {
-        btn.classList.add('btn')
-    }
 });
