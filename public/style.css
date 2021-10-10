@@ -8,6 +8,7 @@
     --colorMax: white;
     
     --casi-negro: #313131;
+    --casi-negro: black;
     --gris-osc: #5e5e5e;
 
     --fnt-title: 'Major Mono Display', monospace;
@@ -334,7 +335,7 @@ header {
     --alto: 44px;
     width: 100vw;
     height: var(--alto);
-    background-color: black;
+    background-color: var(--casi-negro);
     box-shadow: var(--sombra);
     position: fixed;
     top: 0;
@@ -758,7 +759,7 @@ section:last-of-type {
     filter: blur(1px);
     opacity: .75;
     user-select: none;
-    mix-blend-mode: difference;
+    mix-blend-mode: exclusion;
 }
 .card > img {
     margin: 10px;
