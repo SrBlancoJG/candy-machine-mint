@@ -132,7 +132,12 @@ under::after {
     background: var(--colorMid) !important;
 }
 .MuiDialog-paper .MuiButton-text:hover {
-    background: var(--colorMax) !important;
+    /* background: var(--colorMax) !important; */
+    filter: brightness(.5);
+    -webkit-filter: brightness(.5);
+}
+.MuiDialogTitle-root {
+    padding: 0 10px !important;
 }
 
 /* Botones */
@@ -186,7 +191,6 @@ under::after {
 .MuiButton-root:hover {
     background:  var(--colorMid);
     box-shadow: 0 3px 6px 1px black;
-    
     color: white;
 }
 /* Sub-menu */
@@ -195,25 +199,26 @@ under::after {
     bottom: 0%;
     left: 0;
     z-index: 0;
-
     width: 100%;
     background-color: var(--colorMid);
-    
     display: none;
     flex-flow: row;
     justify-content: space-around;
-    
-    transform: translateY(100px);
     transition: all .5s;
     user-select: none;
+    transform: translateY(100px);
+    -webkit-transform: translateY(100px);
+    -moz-transform: translateY(100px);
+    -ms-transform: translateY(100px);
+    -o-transform: translateY(100px);
 }
 .btn.on .sub-menu {
     display: flex;
-    transform: translateY(-74px);
-    -webkit-transform: translateY(-74px);
-    -moz-transform: translateY(-74px);
-    -ms-transform: translateY(-74px);
-    -o-transform: translateY(-74px);
+    transform: translateY(-34px);
+    -webkit-transform: translateY(-34px);
+    -moz-transform: translateY(-34px);
+    -ms-transform: translateY(-34px);
+    -o-transform: translateY(-34px);
 }
 .sub-menu .btn {
     padding: 20px;
@@ -559,11 +564,11 @@ section:last-of-type {
 }
 #galery .dec-img::before {
     top: var(--margen);
-    left: var(--margen);
+    left: calc(var(--margen) + 5px);
 }
 #galery .dec-img::after {
     bottom: var(--margen);
-    right: var(--margen);
+    right: calc(var(--margen) + 5px);
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
@@ -819,7 +824,6 @@ section:last-of-type {
 /* FOOTER */
 footer {
     width: 100%;
-    padding: 10px;
     background-color: var(--casi-negro);
     box-shadow: var(--sombra);
     
@@ -846,7 +850,6 @@ footer a {
 }
 footer > div {
     max-width: 1000px;
-    padding: 10px;
     margin: 0 auto;
     
     display: flex;
@@ -907,6 +910,9 @@ footer > div {
         font-size: var(--txt-s);
     }
     
+    #roadmap h3 {
+        font-size: var(--txt-m);
+    }
     .roadmap-prog {
         width: 20px;
         height: 80%;
