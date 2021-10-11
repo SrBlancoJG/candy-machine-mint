@@ -933,6 +933,12 @@ footer > div {
 
 /* MOVIL */
 @media (max-width: 991px) {
+    :root {
+        --txt-xl: 54px;
+        --txt-l: 26px;
+        --txt-m: 20px;
+        --txt-s: 14px;
+    }
     header > .container {
         width: 100%;
     }
@@ -941,6 +947,14 @@ footer > div {
     } */
     section {
         max-width: calc(100vw - 36px);
+    }
+
+    .main {
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    .btn.mint {
+        width: 200px;
     }
     
     /* Grid alternado */
@@ -1002,9 +1016,22 @@ footer > div {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+    :root {
+        --txt-xl: 34px;
+        --txt-l: 18px;
+        --txt-m: 16px;
+        --txt-s: 10px;
+    }
+    .btn.mint {
+        width: 170px;
+    }
     .roadmap-prog {
         left: 30px;
+    }
+    .MuiButton-root {
+        font-size: var(--txt-s) !important;
+        max-width: 50vw !important;
     }
 }
 @media (max-width: 1500px) {
