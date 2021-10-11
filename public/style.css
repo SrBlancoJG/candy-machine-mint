@@ -942,6 +942,9 @@ footer > div {
     header > .container {
         width: 100%;
     }
+    #hover-main-menu .stats {
+        padding: 0;
+    }
     /* .desp-menu {
         display: none;
     } */
@@ -958,6 +961,10 @@ footer > div {
     }
     
     /* Grid alternado */
+    #galery img {
+        max-width: 85vw;
+        height: auto;
+    }
     .alt-grid {
         margin-left: 50px;
         padding: 0;
@@ -992,6 +999,9 @@ footer > div {
     .grid .grid-item:nth-child(even) {
         flex-flow: column-reverse;
     }
+    .interior {
+        padding: 20px 0;
+    }
 
     /* FAQ */
     .padre-desplegable .A {
@@ -1021,7 +1031,7 @@ footer > div {
         --txt-xl: 34px;
         --txt-l: 18px;
         --txt-m: 16px;
-        --txt-s: 10px;
+        --txt-s: 14px;
     }
     .btn.mint {
         width: 170px;
@@ -1032,6 +1042,9 @@ footer > div {
     .MuiButton-root {
         font-size: var(--txt-s) !important;
         max-width: 50vw !important;
+    }
+    footer .btn {
+        padding: 10px 5px;
     }
 }
 @media (max-width: 1500px) {
