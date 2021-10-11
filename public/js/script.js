@@ -1,3 +1,5 @@
+/* const { removeAllListeners } = require("process"); */
+
 document.addEventListener('DOMContentLoaded', () => {
     /* ESCRITORIO */
     if (window.innerWidth > 991) {
@@ -67,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             clearInterval(tmp_inter);
+            document.querySelector('#hero').classList.add('visible');
+            
             setInterval(() => {
                 if (window.screenTop < 500) {
                     initIFS();
@@ -78,29 +82,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
     
-    var controller = new ScrollMagic.Controller();
-    /* REVEAL GALERIA */
+
+    /* REVEALS GALERIA */
+    let triggers = ['#faq'];
     for (let i=1; i<=4; i++) {
-        new ScrollMagic.Scene({
-            triggerElement: "#reveal-1-"+i,
-            triggerHook: 0.5, // show, when scrolled 10% into view
-            duration: "80%", // hide 10% before exiting view (80% + 10% from bottom)
-            offset: 50 // move trigger to center of element
-        })
-        .setClassToggle("#reveal-1-"+i, "visible") // add class to reveal
-        .addTo(controller);
+        triggers.push(`#reveal-1-${i}`)
+    }
+    for (i=0; i<=5; i++) {
+        triggers.push(`#reveal-2-${i}`);
     }
 
-    /* REVEAL FAQ */
-    new ScrollMagic.Scene({
-        triggerElement: "#faq",
-        triggerHook: 0.5, // show, when scrolled 10% into view
-        duration: "80%", // hide 10% before exiting view (80% + 10% from bottom)
-        offset: 50 // move trigger to center of element
-    })
-    .setClassToggle("#faq", "visible") // add class to reveal
-    .addTo(controller);
+    function check_reveals() {
+        let linea = (window.innerHeight/3) * 2;
+        for (let trigger of document.querySelectorAll(triggers)) {
 
+            if (linea > trigger.getBoundingClientRect().top) {
+                trigger.classList.add('visible');
+            }
+        }
+    }
+    check_reveals();
+    window.addEventListener('scroll', check_reveals);
+
+    /* Delay FAQ */
     let c = 0;
     for (let padre of document.querySelectorAll('#faq .padre-desplegable')) {
         padre.style.transitionDelay = c+'s';
