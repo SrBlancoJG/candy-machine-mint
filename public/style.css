@@ -599,7 +599,8 @@ section:last-of-type {
     -ms-transition: all .5s ease-out;
     -o-transition: all .5s ease-out;
 }
-.reveal.visible {
+.reveal.visible,
+.visible .reveal {
     opacity: 1 !important;
 }
 .reveal > div {
