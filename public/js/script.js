@@ -59,17 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Cambiar fractales? */
     $(document).ready(function () {
-        let tmp_inter = setInterval(() => {
+        /* let tmp_inter = setInterval(() => {
             if (window.screenTop < 500) {
                 initIFS();
                 set_colors();
                 //console.log('🦧')
             }
-        }, 250);
-
+        }, 250); */
         setTimeout(() => {
-            clearInterval(tmp_inter);
             document.querySelector('#hero').classList.add('visible');
+        }, 500);
+        
+        // setTimeout(() => {
+            //clearInterval(tmp_inter);
             
             setInterval(() => {
                 if (window.screenTop < 500) {
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     //console.log('🦧')
                 }
             }, 2500);
-        }, 1500);
+        //}, 1500);
 
     });
     
