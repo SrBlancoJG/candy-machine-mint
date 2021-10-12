@@ -543,7 +543,7 @@ section:last-of-type {
     font-family: var(--fnt-title);
     font-size: var(--txt-m);
     font-weight: 700;
-    
+    text-transform: lowercase;
     margin: 0;
     padding: 0 50px;
     mix-blend-mode: difference;
@@ -1078,4 +1078,13 @@ paleta > div {
 }
 paleta > div:last-child {
     background: var(--colorMax);
+}
+
+.mintContainer{
+    position: absolute;
+    top: 65vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: fit-content;
 }

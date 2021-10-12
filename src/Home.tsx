@@ -148,29 +148,30 @@ const Home = (props: HomeProps) => {
   return (
     <main>
       {wallet && (
-        <p>Address: {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
+        <p className="stats">Address: {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
       )}
 
       {wallet && (
-        <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
+        <p className="stats">Balance: {(balance || 0).toLocaleString()} SOL</p>
       )}
 
-      <MintContainer>
+      <MintContainer className="mintContainer">
         {!wallet ? (
           <ConnectButton>Connect Wallet</ConnectButton>
         ) : (
           <MintButton
+          className="btn mint"
             disabled={isSoldOut || isMinting || !isActive}
             onClick={onMint}
             variant="contained"
           >
             {isSoldOut ? (
-              "SOLD OUT"
+              "¥  SOLD OUT  ¥"
             ) : isActive ? (
               isMinting ? (
                 <CircularProgress />
               ) : (
-                "MINT"
+                "¥  MINT  ¥"
               )
             ) : (
               <Countdown
