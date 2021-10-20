@@ -186,9 +186,9 @@ under::after {
     user-select: none !important;
 
     font-family: var(--fnt-title) !important;
-    font-size: var(--txt-s) !important;
+    /* font-size: var(--txt-s) !important;
     text-transform: lowercase !important;
-    font-weight: 600 !important;
+    font-weight: 600 !important; */
 }
 .btn:hover,
 .MuiButton-root:hover {
@@ -253,7 +253,7 @@ under::after {
     padding: 15px 40px;
     margin-bottom: 15px;
     background-color: var(--colorMin);
-    outline: 3px solid white;
+    outline: 3px solid white ;
     font-size: var(--txt-l) !important;
     font-weight: 900 !important;
     font-family: var(--fnt-cont) !important;
@@ -261,7 +261,7 @@ under::after {
     letter-spacing: 10px;
     color: white;
     box-shadow: none !important;
-    mix-blend-mode: difference;
+    mix-blend-mode: exclusion;
     transition: all .5s;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
@@ -400,7 +400,9 @@ header > .container {
 header svg {
     height: 30px;
     cursor: pointer;
+    object-position: center;
     filter: drop-shadow(2px 4px 4px black);
+    -webkit-filter: drop-shadow(2px 4px 4px black);
 }
 header a path {
     fill: white;
@@ -710,12 +712,15 @@ section:last-of-type {
     -o-transition: max-height .5s;
 }
 .padre-desplegable.on .A {
-    max-height: 500px;
+    max-height: 600px;
 }
 .padre-desplegable .A a {
     text-decoration: underline dashed !important;
     color: white !important;
     font-weight: 800;
+}
+.padre-desplegable.on .A strong {
+    font-weight: 900;
 }
 .padre-desplegable .A span {
     padding: 10px 0px 10px 30px;
