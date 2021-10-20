@@ -186,6 +186,7 @@ under::after {
     user-select: none !important;
 
     font-family: var(--fnt-title) !important;
+    text-transform: lowercase !important;
     /* font-size: var(--txt-s) !important;
     text-transform: lowercase !important;
     font-weight: 600 !important; */
@@ -206,7 +207,7 @@ under::after {
     background-color: var(--colorMid);
     display: none;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content: space-between;
     transition: all .5s;
     user-select: none;
     transform: translateY(100px);
@@ -214,6 +215,11 @@ under::after {
     -moz-transform: translateY(100px);
     -ms-transform: translateY(100px);
     -o-transform: translateY(100px);
+    max-width: 1440px;
+    margin: 0 auto;
+    right: 0;
+    /* border-right: 2px solid white;
+    border-left: 2px solid white; */
 }
 .btn.on .sub-menu {
     display: flex;
@@ -224,7 +230,7 @@ under::after {
     -o-transform: translateY(-34px);
 }
 .sub-menu .btn {
-    padding: 20px;
+    padding: 20px 24px;
     color: black;
 }
 .sub-menu .btn:hover {
@@ -324,7 +330,7 @@ under::after {
     z-index: 100000;
     
     width: 100%;
-    height: 2px;
+    height: 4px;
     background-color: var(--casi-negro)
 }
 #progreso-scroll {
@@ -352,7 +358,7 @@ header {
     background-color: white;
     /* box-shadow: var(--sombra); */
     position: fixed;
-    top: 0;
+    top: 3;
     left: 0;
     z-index: 1000;
     display: flex;
@@ -389,13 +395,20 @@ header.off {
     -o-transform: translateY(calc(var(--alto) * -1));
 }
 
-header > .container {
+header > .container,
+footer > .container {
     max-width: 1444px;
     width: calc(100% - 60px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: black;
+}
+footer > .container {
+    background-color: white;
+    max-width: 1440px;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
 }
 header svg {
     height: 30px;
@@ -510,7 +523,6 @@ section::after {
     top: 0;
     left: -2px;
     border-radius: 100%;
-    opacity: .7;
 }
 section::after {
     right: -2px;
@@ -658,12 +670,16 @@ section:last-of-type {
     position: relative;
     margin-bottom: 0;
     text-shadow: 1px 1px 6px black;
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; */
+    /* filter: brightness(1.5);
+    -webkit-filter: brightness(1.5); */
+    mix-blend-mode: unset;
 }
 .padre-desplegable .Q:hover {
-    filter: brightness(1.5);
+    /* filter: brightness(1.5);
     -webkit-filter: brightness(1.5);
-    mix-blend-mode: unset;
+    mix-blend-mode: unset; */
+    mix-blend-mode: difference;
 }
 .padre-desplegable .Q::before,
 .padre-desplegable .Q::after {
@@ -903,8 +919,8 @@ section:last-of-type {
 /* FOOTER */
 footer {
     width: 100%;
-    background-color: var(--casi-negro);
-    box-shadow: var(--sombra);
+    background-color: white;
+    /* box-shadow: var(--sombra); */
     
     position: relative;
     z-index: 10;
@@ -924,8 +940,10 @@ footer::before {
 
     display: none;
 }
-footer a {
-    color: white;
+footer a,
+footer * {
+    color: black;
+    font-weight: 800;
 }
 footer > div {
     max-width: 1000px;
@@ -934,6 +952,10 @@ footer > div {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+footer .btn:hover {
+    box-shadow: none;
+    color: black;
 }
 
 /* MOVIL */
@@ -944,17 +966,21 @@ footer > div {
         --txt-m: 20px;
         --txt-s: 14px;
     }
-    header > .container {
+    header > .container,
+    footer > .container {
         width: 100%;
+        border: none;
     }
-    #hover-main-menu .stats {
+    .stats {
         padding: 0;
+        font-size: var(--txt-s);
     }
     /* .desp-menu {
         display: none;
     } */
     section {
         max-width: calc(100vw - 36px);
+        min-height: auto;
     }
 
     .main {
@@ -975,7 +1001,7 @@ footer > div {
         padding: 0;
     }
     .alt-grid .grid-item {
-        justify-content: space-between;
+        /* justify-content: space-between; */
     }
     .grid-item {
         width: 90%;
