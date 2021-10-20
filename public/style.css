@@ -354,7 +354,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1080,11 +1080,13 @@ paleta > div:last-child {
     background: var(--colorMax);
 }
 
-.mintContainer{
+.mint{
     position: absolute;
     top: 65vh;
     left: 0;
     right: 0;
     margin: auto;
     width: fit-content;
+    z-index: 100;
+    mix-blend-mode: difference;
 }

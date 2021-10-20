@@ -155,12 +155,12 @@ const Home = (props: HomeProps) => {
         <p className="stats">Balance: {(balance || 0).toLocaleString()} SOL</p>
       )}
 
-      <MintContainer className="mintContainer">
+      <MintContainer className="mint">
         {!wallet ? (
-          <ConnectButton>Connect Wallet</ConnectButton>
+          <ConnectButton className="btn">Connect Wallet</ConnectButton>
         ) : (
           <MintButton
-          className="btn mint"
+          className="btn"
             disabled={isSoldOut || isMinting || !isActive}
             onClick={onMint}
             variant="contained"
