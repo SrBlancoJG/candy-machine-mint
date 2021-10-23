@@ -30,10 +30,33 @@
   <script src="js/main.js"></script>
   <script src="js/script.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('#my-loader').outerHTML = '';
+      document.querySelector('#falso-scroll').outerHTML = '';
+      document.querySelector('#root').outerHTML = '';
+      document.querySelector('header').outerHTML = '';
+      document.querySelector('.main').innerHTML = `<h1 style="
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      height: fit-content;
+      ">Coming soon...</h1>`;
+      document.querySelector('.main').style.display = 'flex';
+      document.querySelector('.main').style.height = '100%';
+    });
+  </script>
+
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
+  <div id="my-loader"
+    style="background: black;width: 100vw; height: 100vh; position: absolute; top: 0; z-index: 10000;"
+  ></div>
+
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
   <!-- FALSO SCROLL -->
@@ -81,7 +104,7 @@
     </canvas>
     <canvas id="fractal-ui" style="display: none;">
     </canvas>
-    <p style="position: absolute;
+    <p id="simbolo-dec-canvas" style="position: absolute;
     font-size: 1500px;
     top: 10%;
     left: 0;
