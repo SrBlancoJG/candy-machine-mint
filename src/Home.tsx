@@ -197,10 +197,7 @@ const Home = (props: HomeProps) => {
           {alertState.message}
         </Alert>
       </Snackbar>
-      {/* <ScriptTag type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" />
-      <ScriptTag type="text/javascript" src="js/lightgl.min.js" />
-      <ScriptTag type="text/javascript" src="js/ifs.js" />
-      <ScriptTag type="text/javascript" src="js/main.js" /> */}
+      
     </main>
   );
 };

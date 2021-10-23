@@ -1,0 +1,21 @@
+.Lottery{
+    text-align: center;
+}
+
+#no-nfts{
+    position: absolute;
+    top: 100px;
+    z-index: 10;
+}
+
+#one-nft{
+    position: absolute;
+    top: 150px;
+    z-index: 10;
+}
+
+#connect{
+    position: absolute;
+    top: 100px;
+    z-index: 10;
+}
