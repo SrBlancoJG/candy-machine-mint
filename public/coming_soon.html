@@ -32,15 +32,28 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+      window.addEventListener('click', () => {
+        initIFS();
+        set_colors();
+      });
+
       setInterval(() => {
         if (window.screenTop < 500) {
             initIFS();
             set_colors();
-            //console.log('🦧')
         }
       }, 2500);
     });
   </script>
+
+  <style>
+    @media (max-width: 991px) {
+      #fractal-container > p {
+        font-size: 400px !important;
+      }
+    }
+  </style>
 
   <link href="style.css" rel="stylesheet">
 </head>
