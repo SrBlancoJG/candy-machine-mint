@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+  <link rel="icon" href="https://nebulasol.app//favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Welcome to the official marketplace of the NebulaSol Fractal Tokens" />
@@ -12,7 +12,7 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="manifest" href="https://nebulasol.app//manifest.json" />
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -30,10 +30,21 @@
   <script src="js/main.js"></script>
   <script src="js/script.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.location.href = 'https://nebulasol.app/coming_soon.html';
+      //document.querySelector('#my-loader').outerHTML = '';
+    });
+  </script>
+
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
+  <div id="my-loader"
+    style="background: black;width: 100vw; height: 100vh; position: absolute; top: 0; z-index: 10000;"
+  ></div>
+
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
   <!-- FALSO SCROLL -->
@@ -81,7 +92,7 @@
     </canvas>
     <canvas id="fractal-ui" style="display: none;">
     </canvas>
-    <p style="position: absolute;
+    <p id="simbolo-dec-canvas" style="position: absolute;
     font-size: 1500px;
     top: 10%;
     left: 0;
