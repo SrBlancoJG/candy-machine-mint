@@ -22,8 +22,6 @@ import {
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 
-import { Switch, Route } from "react-router-dom";
-import Lottery from "./Lottery";
 
 const treasury = new anchor.web3.PublicKey(
   process.env.REACT_APP_TREASURY_ADDRESS!
@@ -86,13 +84,11 @@ const App = () => {
   );
 
   return (
-    <Switch>
       <ThemeProvider theme={theme}>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletDialogProvider>
               
-                <Route exact path="/">
                   <Home
                     candyMachineId={candyMachineId}
                     config={config}
@@ -101,15 +97,10 @@ const App = () => {
                     treasury={treasury}
                     txTimeout={txTimeout}
                   />
-                </Route>
-                <Route path="/lottery">
-                  <Lottery connection={connection}></Lottery>
-                </Route>
             </WalletDialogProvider>
           </WalletProvider>
         </ConnectionProvider>
       </ThemeProvider>
-      </Switch>
   );
 };
 

@@ -1,0 +1,41 @@
+#no-nfts{
+    transform: translateX(-75%);
+    -webkit-transform: translateX(-75%);
+    -moz-transform: translateX(-75%);
+    -ms-transform: translateX(-75%);
+    -o-transform: translateX(-75%);
+}
+
+#one-nft{
+    transform: translateX(75%);
+    -webkit-transform: translateX(75%);
+    -moz-transform: translateX(75%);
+    -ms-transform: translateX(75%);
+    -o-transform: translateX(75%);
+}
+
+#one-nft, #no-nfts{
+    position: absolute;
+    top: 74vh !important;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 20px;
+    z-index: 10;
+
+}
+
+@media (max-width: 991px){
+    #one-nft, #no-nfts{
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+}
+#no-nfts{
+    top: 80vh !important;
+}
+}

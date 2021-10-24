@@ -1,3 +1,4 @@
+import "./Home.css";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Countdown from "react-countdown";
@@ -6,7 +7,7 @@ import Alert from "@material-ui/lab/Alert";
 
 import * as anchor from "@project-serum/anchor";
 
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
@@ -41,6 +42,8 @@ const Home = (props: HomeProps) => {
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
+  const [isNoNftLottery, setIsNoNftLottery] = useState(false); // true when user is pressing NO NFT LOTTERY
+  const [isOneNftLottery, setIsOneNftLottery] = useState(false); // true when user is pressing ONE OR MORE NFT LOTTERY
 
   const [alertState, setAlertState] = useState<AlertState>({
     open: false,
@@ -119,6 +122,48 @@ const Home = (props: HomeProps) => {
     }
   };
 
+  const onNftLottery = async (noNft: boolean) => {
+    try {
+      noNft? setIsNoNftLottery(true) : setIsOneNftLottery(false);
+      if (wallet) {
+        const transaction = new anchor.web3.Transaction({
+          feePayer: wallet.publicKey,
+        }).add(
+          anchor.web3.SystemProgram.transfer({
+            fromPubkey: wallet.publicKey,
+            toPubkey: new PublicKey(
+              "HkkTZqLJ6VEDKgpc1tQgrxfUzr5vQoLL6sHozpkeBdC4"
+            ), // lottery address
+            lamports: anchor.web3.LAMPORTS_PER_SOL * (noNft ? 0.2 : 0), // transfer of 0.2 sols
+          })
+        );
+        const blkHashObj = await props.connection.getRecentBlockhash();
+        transaction.recentBlockhash = blkHashObj.blockhash;
+
+        const signature = await wallet.signTransaction(transaction); // signature of sender
+        const txSignature = await props.connection.sendRawTransaction(
+          signature.serialize()
+        ); // send the transaction signed
+        const confirmed = await props.connection.confirmTransaction(
+          txSignature
+        );
+        console.log(confirmed);
+      }
+    } catch (error: any) {
+      console.log(error);
+      setAlertState({
+        open: true,
+        message: "Something went wrong",
+        severity: "error",
+      });
+    } finally {
+      if (wallet) {
+        const balance = await props.connection.getBalance(wallet.publicKey);
+        setBalance(balance / LAMPORTS_PER_SOL);
+      }
+      noNft? setIsNoNftLottery(false) : setIsOneNftLottery(false);
+    }
+  };
   useEffect(() => {
     (async () => {
       if (wallet) {
@@ -148,7 +193,9 @@ const Home = (props: HomeProps) => {
   return (
     <main>
       {wallet && (
-        <p className="stats">Address: {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
+        <p className="stats">
+          Address: {shortenAddress(wallet.publicKey.toBase58() || "")}
+        </p>
       )}
 
       {wallet && (
@@ -160,7 +207,7 @@ const Home = (props: HomeProps) => {
           <ConnectButton className="btn">Connect Wallet</ConnectButton>
         ) : (
           <MintButton
-          className="btn"
+            className="btn"
             disabled={isSoldOut || isMinting || !isActive}
             onClick={onMint}
             variant="contained"
@@ -184,6 +231,32 @@ const Home = (props: HomeProps) => {
           </MintButton>
         )}
       </MintContainer>
+      {wallet && (
+        <button
+          id="no-nfts"
+          onClick={() => {
+            onNftLottery(true);
+          }}
+        >
+          {" "}
+          {!isNoNftLottery ? "¥  NO NFT LOTTERY  ¥" : <CircularProgress />}{" "}
+        </button>
+      )}
+      {wallet && (
+        <button
+          id="one-nft"
+          onClick={() => {
+            onNftLottery(false);
+          }}
+        >
+          {" "}
+          {!isOneNftLottery ? (
+            "¥  MINTED NFT LOTTERY  ¥"
+          ) : (
+            <CircularProgress />
+          )}{" "}
+        </button>
+      )}
 
       <Snackbar
         open={alertState.open}
@@ -197,7 +270,6 @@ const Home = (props: HomeProps) => {
           {alertState.message}
         </Alert>
       </Snackbar>
-      
     </main>
   );
 };
