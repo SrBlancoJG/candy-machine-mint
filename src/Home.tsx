@@ -1,7 +1,6 @@
 import "./Home.css";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Countdown from "react-countdown";
 import { Button, CircularProgress, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
@@ -13,16 +12,15 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
 
 import {
-  CandyMachine,
-  awaitTransactionSignatureConfirmation,
-  getCandyMachineState,
-  mintOneToken,
+  //CandyMachine,
+  //getCandyMachineState,
   shortenAddress,
 } from "./candy-machine";
+import { getTotalNfts, postMint, postNoNftLottery } from "./back-services";
 
 const ConnectButton = styled(WalletDialogButton)``;
 
-const CounterText = styled.span``; // add your styles here
+//const CounterText = styled.span``; // add your styles here
 
 const MintContainer = styled.div``; // add your styles here
 
@@ -39,8 +37,8 @@ export interface HomeProps {
 
 const Home = (props: HomeProps) => {
   const [balance, setBalance] = useState<number>();
-  const [isActive, setIsActive] = useState(false); // true when countdown completes
-  const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
+  //const [isActive, setIsActive] = useState(false); // true when countdown completes
+  //const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
   const [isNoNftLottery, setIsNoNftLottery] = useState(false); // true when user is pressing NO NFT LOTTERY
   const [isOneNftLottery, setIsOneNftLottery] = useState(false); // true when user is pressing ONE OR MORE NFT LOTTERY
@@ -51,13 +49,75 @@ const Home = (props: HomeProps) => {
     severity: undefined,
   });
 
-  const [startDate, setStartDate] = useState(new Date(props.startDate));
+  //const [startDate, setStartDate] = useState(new Date(props.startDate));
 
   const wallet = useAnchorWallet();
-  const [candyMachine, setCandyMachine] = useState<CandyMachine>();
+  //const [candyMachine, setCandyMachine] = useState<CandyMachine>();
 
   const onMint = async () => {
-    try {
+    setIsMinting(true);
+    try{
+      if(wallet){
+        const totalNfts = await getTotalNfts();
+        if(totalNfts <= 0){
+          setAlertState({
+            open: true,
+            message: "NFTs Sold Out!",
+            severity: "error"
+          });
+          return;
+        }
+        const transaction = new anchor.web3.Transaction({
+          feePayer: wallet.publicKey,
+        }).add(
+          anchor.web3.SystemProgram.transfer({
+            fromPubkey: wallet.publicKey,
+            toPubkey: new PublicKey(
+              "36yegJUQjRjqyGvVtWyBFFSWPG1RFmETdKb75wux2qGp"
+            ), // lottery address
+            lamports: anchor.web3.LAMPORTS_PER_SOL * /*2*/ 1, // IMPORTANTE PONER 2 AQUI
+          })
+        );
+        const blkHashObj = await props.connection.getRecentBlockhash();
+        transaction.recentBlockhash = blkHashObj.blockhash;
+
+        const signature = await wallet.signTransaction(transaction); // signature of sender
+        const txSignature = await props.connection.sendRawTransaction(
+          signature.serialize()
+        ); // send the transaction signed
+        const confirmed = await props.connection.confirmTransaction(
+          txSignature
+        );
+        if(confirmed.value.err != null){
+          setAlertState({
+            open: true,
+            message: "Mint's transaction couldn't be confirmed",
+            severity: "error"
+          });
+        }else{
+          postMint(txSignature)
+          .then(res => {
+            console.log(res);
+          })
+        }
+      }else{
+        setAlertState({
+          open: true,
+          message: "Wallet is not connected!",
+          severity: "error"
+        });
+      }
+    }catch(error: any){
+      console.log(error);
+      setAlertState({
+        open: true,
+        message: "Error in the connection",
+        severity: "error"
+      });
+    }finally{
+      setIsMinting(false);
+    }
+    /* try {
       setIsMinting(true);
       if (wallet && candyMachine?.program) {
         const mintTxId = await mintOneToken(
@@ -119,7 +179,8 @@ const Home = (props: HomeProps) => {
         setBalance(balance / LAMPORTS_PER_SOL);
       }
       setIsMinting(false);
-    }
+    } */
+
   };
 
   const onNftLottery = async (noNft: boolean) => {
@@ -147,7 +208,26 @@ const Home = (props: HomeProps) => {
         const confirmed = await props.connection.confirmTransaction(
           txSignature
         );
-        console.log(confirmed);
+        if(confirmed.value.err != null){
+          setAlertState({
+            open: true,
+            message: "Transaction couldn't be confirmed",
+            severity: "error"
+          });
+        }else{
+          postNoNftLottery(txSignature)
+          .then(res => {
+            const numberLottery = res.number;
+            setAlertState({
+              open:true,
+              message: `#${numberLottery} Ticket created!`,
+              severity: "success"
+            })
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
       }
     } catch (error: any) {
       console.log(error);
@@ -173,7 +253,7 @@ const Home = (props: HomeProps) => {
     })();
   }, [wallet, props.connection]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     (async () => {
       if (!wallet) return;
 
@@ -188,7 +268,7 @@ const Home = (props: HomeProps) => {
       setStartDate(goLiveDate);
       setCandyMachine(candyMachine);
     })();
-  }, [wallet, props.candyMachineId, props.connection]);
+  }, [wallet, props.candyMachineId, props.connection]); */
 
   return (
     <main>
@@ -208,26 +288,11 @@ const Home = (props: HomeProps) => {
         ) : (
           <MintButton
             className="btn"
-            disabled={isSoldOut || isMinting || !isActive}
+            disabled={isMinting}
             onClick={onMint}
             variant="contained"
           >
-            {isSoldOut ? (
-              "¥  SOLD OUT  ¥"
-            ) : isActive ? (
-              isMinting ? (
-                <CircularProgress />
-              ) : (
-                "¥  MINT  ¥"
-              )
-            ) : (
-              <Countdown
-                date={startDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
-            )}
+            {isMinting? <CircularProgress/> : "¥  MINT  ¥"}
           </MintButton>
         )}
       </MintContainer>
@@ -280,12 +345,12 @@ interface AlertState {
   severity: "success" | "info" | "warning" | "error" | undefined;
 }
 
-const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
+/* const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
   return (
     <CounterText>
       {hours} hours, {minutes} minutes, {seconds} seconds
     </CounterText>
   );
-};
+}; */
 
 export default Home;
