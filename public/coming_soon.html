@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="https://nebulasol.app/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Welcome to the official marketplace of the NebulaSol Fractal Tokens" />
+
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="https://nebulasol.app/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>N E B U L A S O L</title>
+  
+  <script src="js/jquery.js"></script>
+  <script src="js/lightgl.min.js"></script>
+  <script src="js/ifs.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      window.addEventListener('click', () => {
+        initIFS();
+        set_colors();
+        clearInterval(inter)
+        inter = setInterval(() => {
+          if (window.screenTop < 500) {
+              initIFS();
+              set_colors();
+          }
+      }, 2500);
+      });
+
+      let inter = setInterval(() => {
+        if (window.screenTop < 500) {
+            initIFS();
+            set_colors();
+        }
+      }, 2500);
+    });
+  </script>
+
+  <style>
+    @media (max-width: 991px) {
+      #fractal-container > p {
+        font-size: 400px !important;
+      }
+    }
+  </style>
+
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- <div id="my-loader"
+    style="background: black;width: 100vw; height: 100vh; position: absolute; top: 0; z-index: 10000;"
+  ></div> -->
+
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+
+  <!-- FRACTAL -->
+  <div id="fractal-container">
+    <canvas id="the-fractal">
+    </canvas>
+    <canvas id="fractal-ui" style="display: none;">
+    </canvas>
+    <p id="simbolo-dec-canvas" style="
+    color: white;
+    position: absolute;
+    font-size: 800px;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    mix-blend-mode: exclusion;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;">¥</p>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main" style="height: 100%;">
+    <h1 style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    mix-blend-mode: difference;
+    font-weight: 900;
+    ">Coming soon</h1>
+  </main>
+</body>
+
+</html>
