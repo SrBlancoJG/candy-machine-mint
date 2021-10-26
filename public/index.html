@@ -20,8 +20,25 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.location.href += 'coming_soon.html';
-      //document.querySelector('#my-loader').outerHTML = '';
+
+      window.addEventListener('click', () => {
+        initIFS();
+        set_colors();
+        clearInterval(inter)
+        inter = setInterval(() => {
+          if (window.screenTop < 500) {
+              initIFS();
+              set_colors();
+          }
+      }, 2500);
+      });
+
+      let inter = setInterval(() => {
+        if (window.screenTop < 500) {
+            initIFS();
+            set_colors();
+        }
+      }, 2500);
     });
   </script>
 
@@ -29,17 +46,8 @@
 </head>
 
 <body>
-  <div id="my-loader"
-    style="background: black;width: 100vw; height: 100vh; position: absolute; top: 0; z-index: 10000;"
-  ></div>
-
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <!-- FALSO SCROLL -->
-  <div id="falso-scroll">
-    <div id="fondo-scroll"></div>
-    <div id="progreso-scroll"></div>
-  </div>
 
   <!-- HEADER -->
   <header>
@@ -47,32 +55,23 @@
       <a class="desp-menu">¥</a>
 
       <a href="https://discord.gg/TztCeB8pvw" target="_blank">
-        <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord" class="svg-inline--fa fa-discord fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path></svg>
+        <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord" class="svg-inline--fa fa-discord fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="white" d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path></svg>
+      </a>
+
+      <a href="https://nebulasol.medium.com/" target="_blank">
+        <svg viewBox="0 0 1043.63 592.71" class="q eh"><g data-name="Layer 2"><g data-name="Layer 1"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36M911.56 296.36c0 154.06-65.89 279-147.17 279s-147.17-124.94-147.17-279 65.88-279 147.16-279 147.17 124.9 147.17 279M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"></path></g></g></svg>
       </a>
       
-      <p class="stats">XXd - XXh - XXm</p>
-      <p class="stats">1000 nfts left</p>
 
-      <a>
+      <a href="https://twitter.com/NebulaSolNFT" target="_blank">
         <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="svg-inline--fa fa-twitter fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
       </a>
 
       <a class="desp-menu" style="transform: rotate(180deg);">¥</a>
     </div>
-
-   <!--  <div id="hover-main-menu">
-        <p class="stats">XXd - XXh - XXm</p>
-        <p class="stats">1000 nfts left</p>
-    </div> -->
-
-    <!-- TMP -->
-    <paleta>
-      <div></div>
-      <div></div>
-      <div></div>
-    </paleta>
   </header>
-  <div id="root"></div>
+
+
 
   <!-- FRACTAL -->
   <div id="fractal-container">
@@ -81,7 +80,7 @@
     <canvas id="fractal-ui" style="display: none;">
     </canvas>
     <p id="simbolo-dec-canvas" style="position: absolute;
-    font-size: 1500px;
+    font-size: 700px;
     top: 10%;
     left: 0;
     right: 0;
@@ -89,233 +88,23 @@
     mix-blend-mode: exclusion;
     margin: auto;
     height: fit-content;
-    width: fit-content;
-    transform: translateX(-13px) rotate(180deg);">¥</p>
+    width: fit-content;">¥</p>
   </div>
 
   <!-- MAIN -->
-  <main class="main">
-    <!-- HERO -->
-    <section id="hero" >
-      <h1 class="reveal">
-        Nebula<span>Sol</span>
-      </h1>
-
-      <!-- <a class="btn mint reveal">¥  MINT  ¥</a>
-      <p class="stats reveal">15d 24h 60m</p>
-      <p class="stats reveal">1000 nfts left</p> -->
-    </section>
-    
-    <section id="galery">
-      <h2>Welcome to the official marketplace of the NebulaSol Fractal Tokens</h2>
-      
-      <div class="grid">
-        <div id="reveal-1-1" class="grid-item txt-left reveal">
-          <div>
-            <p>The NebulaSol Fractal Tokens, or NFTs for short, are a collection of 1000 NFTs stored in the Solana Ecosystem for wallets within this blockchain to buy, sell or just hold for the sake of it.</p>
-          </div>
-
-          <div class="dec-img">
-            <img width="350" height="350" src="img/1010.png">
-          </div>
-        </div>
-
-        <div id="reveal-1-2" class="grid-item txt-right reveal">
-          <div class="dec-img">
-            <img width="350" height="350" src="img/485.png">
-          </div>
-          
-          <div>
-            <p>Each one of these NFTs are uniquely generated via algorithms of Iterated Functions Systems, and each one of them tries to encapsulate in an image, especific feelings that make us keep going in the crypto-world.</p>
-          </div>
-        </div>
-
-        <div id="reveal-1-3" class="grid-item txt-left reveal">
-          <div>
-            <p>The joy of a especific trade that made a huge profit to your account, the thrill of finding a hidden gem in a oversaturated market, the pure excitement of being in a promising NFT project mint site, just one minute for it to start, thinking "This mint will be the one".</p>
-          </div>
-
-          
-          <div class="dec-img">
-            <img width="350" height="350" src="img/480.png">
-          </div>
-        </div>
-
-        <div id="reveal-1-4" class="grid-item txt-right reveal">
-          <div class="dec-img">
-            <img width="350" height="350" src="img/1018.png">
-          </div>
-          
-
-          <div>
-            <p>Here at the NebulaTeam we bring you these feelings in the format of mesmerizing fractals and telling you that indeed, this mint will be the one.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <h2>faq</h2>
-
-      <div class="interior">
-        <div class="padre-desplegable">
-          <p class="Q">What is the total supply?</p>
-          <p class="A">There will be <strong>1000</strong> unique NFTs available only at mint site. <strong>Plus 50</strong> exclusive NFTs that will be used in giveaways and marketing to promote the project.</p>
-        </div>
-
-        <div class="padre-desplegable">
-          <p class="Q">When can I mint the NFTs?</p>
-          <p class="A">The mint date is not decided yet, but it will be within the month of <strong>November.</strong></p>
-        </div>
-
-        <div class="padre-desplegable">
-          <p class="Q">What will be the minting price?</p>
-          <p class="A">The price for every mint will be <strong>2 SOL.</strong> No more no less.</p>
-        </div>
-
-        <div class="padre-desplegable">
-          <p class="Q">Is there some kind of limit in the minting?</p>
-          <p class="A">We want everybody to be part of this, so every wallet will only be able to mint <strong>2 NFTs</strong> per address.</p>
-        </div>
-        
-        <div class="padre-desplegable">
-          <p class="Q">Are there any benefits holding NFTs?</p>
-          <p class="A">
-            This is a decentralized project, which means <strong>you can make decisions</strong> in the future of the project.
-            <br><br>
-            To have a voice and decide in the future of the project you'll have to <strong>own NFTs</strong> in your wallet, which are the governance token of the project. The more NFTs you have, the more decision power.
-            <br><br>
-            <strong>That's it?</strong><br>
-            Of course not.
-            <br><br>
-            <strong>Weekly lotteries and giveaways</strong><br>
-            Now on the <strong>Alpha Stage</strong>, holding at least <strong>1 NFT</strong> will let you enter weekly lotteries hosted on our site, giveaways of more exclusive NFTs, and more.
-            <br><br>
-            Alpha Stage?<br>
-            Currently we are on the <strong>Alpha Stage</strong> of the project.
-            Somewhere between <strong>Q4</strong> of this year and <strong>Q1</strong> of the next one, we will release the <strong>Beta Stage</strong> with a brand new generation of NFTs with unique properties.
-            <br><br>
-            To mint those, you'll also need to hold <strong>1 Alpha NFT.</strong>
-          </p>
-        </div>
-        
-        <div class="padre-desplegable">
-          <p class="Q">Is there a rarity system?</p>
-          <p class="A">
-            Based on the <strong>frame</strong> of the NFT, the rarity system   has four levels and 50 promotional/givaway NFTs.<br><br>
-            
-            <!-- · Common - 640/1050<br>
-            · Uncommon - 250/1050<br>
-            · Rare - 100/1050<br>
-            · UltraRare - 10/1050<br>
-            · Promotional - 50/1050 -->
-            <strong>¥ Common</strong> (white) - 640/1050<br>
-            <strong>¥ Uncommon</strong> (blue) - 250/1050<br>
-            <strong>¥ Rare</strong> (purple) - 100/1050<br>
-            <strong>¥ UltraRare</strong> (rainbow) - 10/1050<br>
-            <strong>¥ Promotional</strong> (green) - 50/1050
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROADMAP -->
-    <section id="roadmap">
-      <div style="width: 90%">
-        <h2>ROADMAP</h2>
-
-        <div class="alt-grid">
-          <div id="reveal-2-1" class="grid-item reveal card">
-            <div>
-              <h3>
-                <!-- <svg width="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="terminal" class="svg-inline--fa fa-terminal fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="white" d="M257.981 272.971L63.638 467.314c-9.373 9.373-24.569 9.373-33.941 0L7.029 444.647c-9.357-9.357-9.375-24.522-.04-33.901L161.011 256 6.99 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L257.981 239.03c9.373 9.372 9.373 24.568 0 33.941zM640 456v-32c0-13.255-10.745-24-24-24H312c-13.255 0-24 10.745-24 24v32c0 13.255 10.745 24 24 24h304c13.255 0 24-10.745 24-24z"></path></svg> -->
-                
-                Development
-              </h3>
-  
-              <p>Development of the website</p>
-              <p>Upload of NFTs for mint and marketing</p>
-              <p>Implementing Whitelist</p>
-            </div>
-          </div>
-
-          <div id="reveal-2-2" class="grid-item reveal card off">
-            <div>
-              <h3>
-                <!-- <svg width="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gifts" class="svg-inline--fa fa-gifts fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="white" d="M240.6 194.1c1.9-30.8 17.3-61.2 44-79.8C279.4 103.5 268.7 96 256 96h-29.4l30.7-22c7.2-5.1 8.9-15.1 3.7-22.3l-9.3-13c-5.1-7.2-15.1-8.9-22.3-3.7l-32 22.9 11.5-30.6c3.1-8.3-1.1-17.5-9.4-20.6l-15-5.6c-8.3-3.1-17.5 1.1-20.6 9.4l-19.9 53-19.9-53.1C121 2.1 111.8-2.1 103.5 1l-15 5.6C80.2 9.7 76 19 79.2 27.2l11.5 30.6L58.6 35c-7.2-5.1-17.2-3.5-22.3 3.7l-9.3 13c-5.1 7.2-3.5 17.2 3.7 22.3l30.7 22H32c-17.7 0-32 14.3-32 32v352c0 17.7 14.3 32 32 32h168.9c-5.5-9.5-8.9-20.3-8.9-32V256c0-29.9 20.8-55 48.6-61.9zM224 480c0 17.7 14.3 32 32 32h160V384H224v96zm224 32h160c17.7 0 32-14.3 32-32v-96H448v128zm160-288h-20.4c2.6-7.6 4.4-15.5 4.4-23.8 0-35.5-27-72.2-72.1-72.2-48.1 0-75.9 47.7-87.9 75.3-12.1-27.6-39.9-75.3-87.9-75.3-45.1 0-72.1 36.7-72.1 72.2 0 8.3 1.7 16.2 4.4 23.8H256c-17.7 0-32 14.3-32 32v96h192V224h15.3l.7-.2.7.2H448v128h192v-96c0-17.7-14.3-32-32-32zm-272 0c-2.7-1.4-5.1-3-7.2-4.8-7.3-6.4-8.8-13.8-8.8-19 0-9.7 6.4-24.2 24.1-24.2 18.7 0 35.6 27.4 44.5 48H336zm199.2-4.8c-2.1 1.8-4.5 3.4-7.2 4.8h-52.6c8.8-20.3 25.8-48 44.5-48 17.7 0 24.1 14.5 24.1 24.2 0 5.2-1.5 12.6-8.8 19z"></path></svg> -->
-                Marketing
-              </h3>
-  
-              <p>List in Solanalysis</p>
-              <p>Regular giveaways</p>
-              <p>Search of influencers</p>
-            </div>
-          </div>
-
-          <div id="reveal-2-3" class="grid-item reveal card off">
-            <div>
-              <h3>
-                <!-- <svg width="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search-dollar" class="svg-inline--fa fa-search-dollar fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" d="M505.04 442.66l-99.71-99.69c-4.5-4.5-10.6-7-17-7h-16.3c27.6-35.3 44-79.69 44-127.99C416.03 93.09 322.92 0 208.02 0S0 93.09 0 207.98s93.11 207.98 208.02 207.98c48.3 0 92.71-16.4 128.01-44v16.3c0 6.4 2.5 12.5 7 17l99.71 99.69c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.59.1-33.99zm-297.02-90.7c-79.54 0-144-64.34-144-143.98 0-79.53 64.35-143.98 144-143.98 79.54 0 144 64.34 144 143.98 0 79.53-64.35 143.98-144 143.98zm27.11-152.54l-45.01-13.5c-5.16-1.55-8.77-6.78-8.77-12.73 0-7.27 5.3-13.19 11.8-13.19h28.11c4.56 0 8.96 1.29 12.82 3.72 3.24 2.03 7.36 1.91 10.13-.73l11.75-11.21c3.53-3.37 3.33-9.21-.57-12.14-9.1-6.83-20.08-10.77-31.37-11.35V112c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v16.12c-23.63.63-42.68 20.55-42.68 45.07 0 19.97 12.99 37.81 31.58 43.39l45.01 13.5c5.16 1.55 8.77 6.78 8.77 12.73 0 7.27-5.3 13.19-11.8 13.19h-28.1c-4.56 0-8.96-1.29-12.82-3.72-3.24-2.03-7.36-1.91-10.13.73l-11.75 11.21c-3.53 3.37-3.33 9.21.57 12.14 9.1 6.83 20.08 10.77 31.37 11.35V304c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-16.12c23.63-.63 42.68-20.54 42.68-45.07 0-19.97-12.99-37.81-31.59-43.39z"></path></svg> -->
-                Marketplace listing
-              </h3>
-  
-              <p>List on MagicEden</p>
-              <p>List on DigitalEyes</p>
-              <p>List on SolanArt</p>
-            </div>
-          </div>
-
-          <div id="reveal-2-4" class="grid-item reveal card off">
-            <div>
-              <h3>
-                <!-- <svg width="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rocket" class="svg-inline--fa fa-rocket fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" d="M505.12019,19.09375c-1.18945-5.53125-6.65819-11-12.207-12.1875C460.716,0,435.507,0,410.40747,0,307.17523,0,245.26909,55.20312,199.05238,128H94.83772c-16.34763.01562-35.55658,11.875-42.88664,26.48438L2.51562,253.29688A28.4,28.4,0,0,0,0,264a24.00867,24.00867,0,0,0,24.00582,24H127.81618l-22.47457,22.46875c-11.36521,11.36133-12.99607,32.25781,0,45.25L156.24582,406.625c11.15623,11.1875,32.15619,13.15625,45.27726,0l22.47457-22.46875V488a24.00867,24.00867,0,0,0,24.00581,24,28.55934,28.55934,0,0,0,10.707-2.51562l98.72834-49.39063c14.62888-7.29687,26.50776-26.5,26.50776-42.85937V312.79688c72.59753-46.3125,128.03493-108.40626,128.03493-211.09376C512.07526,76.5,512.07526,51.29688,505.12019,19.09375ZM384.04033,168A40,40,0,1,1,424.05,128,40.02322,40.02322,0,0,1,384.04033,168Z"></path></svg> -->
-                Launch
-              </h3>
-  
-              <p>Precise mint date</p>
-              <p>Begining of Alpha Stage</p>
-            </div>
-          </div>
-
-          <div id="reveal-2-5" class="grid-item reveal card off">
-            <div>
-              <h3>
-                <!-- <svg width="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="terminal" class="svg-inline--fa fa-terminal fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="white" d="M257.981 272.971L63.638 467.314c-9.373 9.373-24.569 9.373-33.941 0L7.029 444.647c-9.357-9.357-9.375-24.522-.04-33.901L161.011 256 6.99 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L257.981 239.03c9.373 9.372 9.373 24.568 0 33.941zM640 456v-32c0-13.255-10.745-24-24-24H312c-13.255 0-24 10.745-24 24v32c0 13.255 10.745 24 24 24h304c13.255 0 24-10.745 24-24z"></path></svg> -->
-                Beta Stage
-              </h3>
-  
-              <p>Creation of Beta generation.</p>
-              <p>Implemetation of NebulaUpgrade.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="roadmap-prog">
-          <div class="off"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="container">
-        <a class="btn" href="https://discord.gg/TztCeB8pvw" target="_blank">Discord</a>
-        
-        <div class="btn padre-desplegable">
-          Marketplaces
-          <div class="sub-menu">
-            <a class="btn">¥ Coming soon ¥</a>
-            <a class="btn">¥ Coming soon ¥</a>
-            <a class="btn">¥ Coming soon ¥</a>
-          </div>
-        </div>
-
-        <a class="btn">Twitter</a>
-      </div>
-    </footer>
+  <main class="main" style="height: 100vh;">
+    <h1 style="
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    mix-blend-mode: difference;
+    font-weight: 900;
+    ">Coming soon</h1>
   </main>
+
 </body>
 
 </html>
