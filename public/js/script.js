@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* REVEALS GALERIA */
     let triggers = ['#faq'];
-    for (let i=1; i<=4; i++) {
+    for (let i=1; i<=5; i++) {
         triggers.push(`#reveal-1-${i}`)
     }
     for (i=0; i<=5; i++) {
