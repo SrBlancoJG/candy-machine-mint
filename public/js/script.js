@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('click', () => {
             initIFS();
             set_colors();
-            clearInterval(inter)
-            inter = setInterval(() => {
+            clearInterval(window.inter)
+            window.inter = setInterval(() => {
                 if (window.screenTop < 500) {
                     initIFS();
                     set_colors();
@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             document.querySelector('#hero').classList.add('visible');
         }, 1000);
-        setInterval(() => {
+
+        window.inter = setInterval(() => {
             if (window.screenTop < 500) {
                 initIFS();
                 set_colors();
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         }, 2500);
+
         setInterval(() => {
             Array.from(document.querySelectorAll('.blink')).forEach(e => {
                 e.classList.add('off');
