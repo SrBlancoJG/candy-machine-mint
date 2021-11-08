@@ -994,6 +994,9 @@ footer .btn:hover {
         --txt-m: 20px;
         --txt-s: 14px;
     }
+    /* #cursor {
+        display: none;
+    } */
     header > .container,
     footer > .container {
         width: 100%;
@@ -1004,7 +1007,7 @@ footer .btn:hover {
         font-size: var(--txt-s);
     }
     header .desp-menu {
-        background-color: black;
+        display: none;
     }
     section {
         max-width: calc(100vw - 36px);
@@ -1112,8 +1115,10 @@ footer .btn:hover {
     .btn.on .sub-menu {
         max-width: 100%;
         width: 100%;
+        height: 100%;
     }
-    section::before, section::after {
+    section::before, section::after,
+    .desp-menu {
         content: none;
     }
 }
@@ -1191,3 +1196,6 @@ paleta > div:last-child {
         -webkit-filter: hue-rotate(360deg) !important;
     }
 }
+body.mobile #cursor {
+    display: none;
+}	

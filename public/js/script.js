@@ -125,6 +125,37 @@ document.addEventListener('DOMContentLoaded', () => {
         c += .2;
     }
 
+    
+
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Detects mobile devices
+    let isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+    if (isMobile.any()) {
+        document.querySelector('body').classList.add('mobile');
+    }
+    
     // Custom cursor: 
     if (document.querySelector('#cursor')) {
         // Mousemove event
@@ -148,13 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Cursor
         document.addEventListener('mousedown', (ev) => {
-           document.querySelector('#cursor').style.filter = 'invert(1)';
-       });
-       // Change cursor when the mouse is released
-       document.addEventListener('mouseup', () => {
-           document.querySelector('#cursor').style.filter = 'invert(0)';
-       });
+        document.querySelector('#cursor').style.filter = 'invert(1)';
+    });
+    // Change cursor when the mouse is released
+    document.addEventListener('mouseup', () => {
+        document.querySelector('#cursor').style.filter = 'invert(0)';
+    });
     }
-
 
 });
