@@ -59,29 +59,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Cambiar fractales? */
     $(document).ready(function () {
-        /* let tmp_inter = setInterval(() => {
+        window.addEventListener('click', () => {
+            initIFS();
+            set_colors();
+            clearInterval(inter)
+            inter = setInterval(() => {
+                if (window.screenTop < 500) {
+                    initIFS();
+                    set_colors();
+                }
+            }, 2500);
+        });
+
+        setTimeout(() => {
+            document.querySelector('#hero').classList.add('visible');
+        }, 1000);
+        setInterval(() => {
             if (window.screenTop < 500) {
                 initIFS();
                 set_colors();
                 //console.log('🦧')
             }
-        }, 250); */
-        setTimeout(() => {
-            document.querySelector('#hero').classList.add('visible');
-        }, 500);
-        
-        // setTimeout(() => {
-            //clearInterval(tmp_inter);
-            
-            setInterval(() => {
-                if (window.screenTop < 500) {
-                    initIFS();
-                    set_colors();
-                    //console.log('🦧')
-                }
-            }, 2500);
-        //}, 1500);
 
+        }, 2500);
+        setInterval(() => {
+            Array.from(document.querySelectorAll('.blink')).forEach(e => {
+                e.classList.add('off');
+                setTimeout(() => {
+                    e.classList.remove('off');
+                }, 250);
+            });
+        }, 1000);
     });
     
 

@@ -25,12 +25,12 @@
         initIFS();
         set_colors();
         clearInterval(inter)
-        inter = setInterval(() => {
-          if (window.screenTop < 500) {
-              initIFS();
-              set_colors();
-          }
-      }, 2500);
+          inter = setInterval(() => {
+            if (window.screenTop < 500) {
+                initIFS();
+                set_colors();
+            }
+        }, 2500);
       });
 
       let inter = setInterval(() => {

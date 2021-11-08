@@ -796,7 +796,7 @@ section:last-of-type {
 }
 .roadmap-prog {
     height: 95%;
-    width: 10px;
+    width: 9px;
     background: linear-gradient(180deg, var(--deg-color));
     overflow: hidden;
 
@@ -1144,4 +1144,30 @@ paleta > div:last-child {
     width: fit-content;
     z-index: 100;
     mix-blend-mode: difference;
+}
+.blink.off {
+    opacity: 0;
+   /*  animation: blinker 2.5s linear infinite;
+    -webkit-animation: blinker 2.5s linear infinite; */
+}
+@keyframes blinker {
+    0% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+    
 }
