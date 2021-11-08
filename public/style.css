@@ -1002,9 +1002,9 @@ footer .btn:hover {
         padding: 0;
         font-size: var(--txt-s);
     }
-    /* .desp-menu {
-        display: none;
-    } */
+    header .desp-menu {
+        background-color: black;
+    }
     section {
         max-width: calc(100vw - 36px);
         min-height: auto;
