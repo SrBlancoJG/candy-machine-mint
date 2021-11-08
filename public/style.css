@@ -33,7 +33,7 @@
     color: var(--colorMid); 
 } */
 * {
-    user-select: none;
+    /* user-select: none; */
 }
 *::selection {
     background: var(--colorMid);
@@ -88,7 +88,8 @@ body {
 
 }
 body * {
-    cursor: url('img/cursor.png'), auto !important;
+    /* cursor: url('img/cursor.png'), auto !important; */
+    cursor: none !important;
 }
 h1 {
     padding: 10px 25px 15px 25px;
@@ -1156,27 +1157,37 @@ paleta > div:last-child {
 }
 .blink.off {
     opacity: 0;
-   /*  animation: blinker 2.5s linear infinite;
-    -webkit-animation: blinker 2.5s linear infinite; */
 }
-@keyframes blinker {
+
+
+#cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: -15px 0 0 -10px;
+    z-index: 10000;
+
+    width: 30px;
+    height: 30px;
+
+    background: url('img/cursor.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+}
+#cursor.on {
+    animation: hue-rotate 10s infinite;
+    -webkit-animation: hue-rotate 10s infinite;
+}
+/* Animation that changes the hue-ratate propertry */
+@keyframes hue-rotate {
     0% {
-        opacity: 1;
-    }
-    20% {
-        opacity: 0;
-    }
-    40% {
-        opacity: 1;
-    }
-    60% {
-        opacity: 0;
-    }
-    80% {
-        opacity: 1;
+        filter: hue-rotate(0deg) !important;
+        -webkit-filter: hue-rotate(0deg) !important;
     }
     100% {
-        opacity: 0;
+        filter: hue-rotate(360deg) !important;
+        -webkit-filter: hue-rotate(360deg) !important;
     }
-    
 }

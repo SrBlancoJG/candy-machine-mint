@@ -69,7 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     set_colors();
                 }
             }, 2500);
+
         });
+       
 
         setTimeout(() => {
             document.querySelector('#hero').classList.add('visible');
@@ -122,5 +124,37 @@ document.addEventListener('DOMContentLoaded', () => {
         padre.style.transitionDelay = c+'s';
         c += .2;
     }
+
+    // Custom cursor: 
+    if (document.querySelector('#cursor')) {
+        // Mousemove event
+        document.addEventListener('mousemove', (e) => {
+            let cursor = document.querySelector('#cursor');
+            
+            // Gets current mouse X and Y position
+            let x = e.clientX;
+            let y = e.clientY;
+            cursor.style.transform = 'translate('+x+'px, '+y+'px)';
+        });
+
+        // Mouse hover on links
+        for (let link of document.querySelectorAll('a, .Q, .btn')) {
+            link.addEventListener('mouseover', () => {
+                document.querySelector('#cursor').classList.add('on');
+            });
+            link.addEventListener('mouseout', () => {
+                document.querySelector('#cursor').classList.remove('on');
+            });
+        }
+        // Cursor
+        document.addEventListener('mousedown', (ev) => {
+           document.querySelector('#cursor').style.filter = 'invert(1)';
+       });
+       // Change cursor when the mouse is released
+       document.addEventListener('mouseup', () => {
+           document.querySelector('#cursor').style.filter = 'invert(0)';
+       });
+    }
+
 
 });
