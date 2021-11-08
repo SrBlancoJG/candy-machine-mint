@@ -1097,6 +1097,12 @@ footer .btn:hover {
     }
 }
 @media (max-width: 1500px) {
+    header > .container,
+    footer > .container,
+    .btn.on .sub-menu {
+        max-width: 100%;
+        width: 100%;
+    }
     section::before, section::after {
         content: none;
     }
