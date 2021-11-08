@@ -39,6 +39,7 @@
     background: var(--colorMid);
 }
 
+
 img, svg,
 h1, h2, h3,
 .btn,
@@ -84,6 +85,10 @@ body {
     font-family: var(--fnt-cont) !important;
     font-size: var(--txt-s);
     color: white;
+
+}
+body * {
+    cursor: url('img/cursor.png'), auto !important;
 }
 h1 {
     padding: 10px 25px 15px 25px;
@@ -238,7 +243,7 @@ under::after {
     -o-transform: translateY(-34px);
 }
 .sub-menu .btn {
-    padding: 20px 24px;
+    padding: 20px 25px;
     color: black;
 }
 .sub-menu .btn:hover {
@@ -425,9 +430,13 @@ header svg {
     object-position: center;
     filter: drop-shadow(2px 4px 4px black);
     -webkit-filter: drop-shadow(2px 4px 4px black);
+    
 }
 header a path {
     fill: white;
+}
+header a:hover path {
+    fill: var(--colorMid);
 }
 
 
